@@ -35,13 +35,3 @@ local function spawnplayer(player)
 	end
 	player:setpos(min_pos)
 end
-
-minetest.register_on_newplayer(function(player)
-	spawnplayer(player)
-end)
-
-minetest.register_on_respawnplayer(function(player)
-	spawnplayer(player)
-	return true
-end)
-
