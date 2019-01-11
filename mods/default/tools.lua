@@ -9,9 +9,9 @@ minetest.register_item(":", {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
 		groupcaps = {
-			crumbly = {times={[2]=3.00, [3]=0.70}, uses=0, maxlevel=1},
+			crumbly = {times={[2]=15.00, [3]=7.70}, uses=0, maxlevel=1},
 			snappy = {times={[3]=0.40}, uses=0, maxlevel=1},
-			oddly_breakable_by_hand = {times={[1]=3.50,[2]=2.00,[3]=0.70}, uses=0}
+			oddly_breakable_by_hand = {times={[1]=10.50,[2]=10.00,[3]=10.70}, uses=0}
 		},
 		damage_groups = {fleshy=1},
 	}
@@ -32,8 +32,9 @@ minetest.register_tool("default:pick_wood", {
 		},
 		damage_groups = {fleshy=2},
 	},
-	groups = {flammable = 2},
+	groups = {not_in_creative_inventory=1, flammable = 2},
 	sound = {breaks = "default_tool_breaks"},
+	
 })
 
 minetest.register_tool("default:pick_stone", {
@@ -48,6 +49,7 @@ minetest.register_tool("default:pick_stone", {
 		damage_groups = {fleshy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:pick_steel", {
@@ -62,6 +64,7 @@ minetest.register_tool("default:pick_steel", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:pick_bronze", {
@@ -76,6 +79,7 @@ minetest.register_tool("default:pick_bronze", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:pick_mese", {
@@ -90,6 +94,7 @@ minetest.register_tool("default:pick_mese", {
 		damage_groups = {fleshy=5},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:pick_diamond", {
@@ -104,6 +109,7 @@ minetest.register_tool("default:pick_diamond", {
 		damage_groups = {fleshy=5},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 --
@@ -122,7 +128,7 @@ minetest.register_tool("default:shovel_wood", {
 		},
 		damage_groups = {fleshy=2},
 	},
-	groups = {flammable = 2},
+	groups = {not_in_creative_inventory=1, flammable = 2},
 	sound = {breaks = "default_tool_breaks"},
 })
 
@@ -139,6 +145,7 @@ minetest.register_tool("default:shovel_stone", {
 		damage_groups = {fleshy=2},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:shovel_steel", {
@@ -154,6 +161,7 @@ minetest.register_tool("default:shovel_steel", {
 		damage_groups = {fleshy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:shovel_bronze", {
@@ -169,6 +177,7 @@ minetest.register_tool("default:shovel_bronze", {
 		damage_groups = {fleshy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:shovel_mese", {
@@ -184,6 +193,7 @@ minetest.register_tool("default:shovel_mese", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:shovel_diamond", {
@@ -199,6 +209,7 @@ minetest.register_tool("default:shovel_diamond", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 --
@@ -216,7 +227,7 @@ minetest.register_tool("default:axe_wood", {
 		},
 		damage_groups = {fleshy=2},
 	},
-	groups = {flammable = 2},
+	groups = {not_in_creative_inventory=1, flammable = 2},
 	sound = {breaks = "default_tool_breaks"},
 })
 
@@ -232,6 +243,7 @@ minetest.register_tool("default:axe_stone", {
 		damage_groups = {fleshy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:axe_steel", {
@@ -246,6 +258,7 @@ minetest.register_tool("default:axe_steel", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:axe_bronze", {
@@ -260,6 +273,7 @@ minetest.register_tool("default:axe_bronze", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:axe_mese", {
@@ -274,6 +288,7 @@ minetest.register_tool("default:axe_mese", {
 		damage_groups = {fleshy=6},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:axe_diamond", {
@@ -288,6 +303,7 @@ minetest.register_tool("default:axe_diamond", {
 		damage_groups = {fleshy=7},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 --
@@ -305,7 +321,7 @@ minetest.register_tool("default:sword_wood", {
 		},
 		damage_groups = {fleshy=2},
 	},
-	groups = {flammable = 2},
+	groups = {not_in_creative_inventory=1, flammable = 2},
 	sound = {breaks = "default_tool_breaks"},
 })
 
@@ -321,6 +337,7 @@ minetest.register_tool("default:sword_stone", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:sword_steel", {
@@ -335,6 +352,7 @@ minetest.register_tool("default:sword_steel", {
 		damage_groups = {fleshy=6},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:sword_bronze", {
@@ -349,6 +367,7 @@ minetest.register_tool("default:sword_bronze", {
 		damage_groups = {fleshy=6},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:sword_mese", {
@@ -363,6 +382,7 @@ minetest.register_tool("default:sword_mese", {
 		damage_groups = {fleshy=7},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:sword_diamond", {
@@ -377,6 +397,7 @@ minetest.register_tool("default:sword_diamond", {
 		damage_groups = {fleshy=8},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
 
 minetest.register_tool("default:key", {

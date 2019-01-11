@@ -81,7 +81,7 @@ minetest.register_craft({
 		{'group:stick'},
 	}
 })
-
+--[[
 minetest.register_craft({
 	output = 'default:pick_wood',
 	recipe = {
@@ -300,7 +300,7 @@ minetest.register_craft({
 		{'group:stick'},
 	}
 })
-
+]]
 minetest.register_craft({
 	output = 'default:skeleton_key',
 	recipe = {

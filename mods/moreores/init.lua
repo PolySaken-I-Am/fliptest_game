@@ -187,6 +187,7 @@ local function add_ore(modname, description, mineral_name, oredef)
 				groupcaps = tooldef
 			},
             sound = {breaks = "default_tool_breaks"},
+			groups={not_in_creative_inventory=1}
 		}
 
 		if tool_name == "sword" then
@@ -227,10 +228,6 @@ local function add_ore(modname, description, mineral_name, oredef)
 		minetest.register_tool(fulltool_name, tdef)
 		minetest.register_alias(tool_name .. tool_post, fulltool_name)
 		if oredef.makes.ingot then
-			minetest.register_craft({
-				output = fulltool_name,
-				recipe = get_recipe(ingot, tool_name)
-			})
 		end
 	end
 end

@@ -93,8 +93,9 @@ minetest.register_tool("ethereal:sword_crystal", {
 		damage_groups = {fleshy = 10},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
-
+--[[
 minetest.register_craft({
 	output = "ethereal:sword_crystal",
 	recipe = {
@@ -103,7 +104,7 @@ minetest.register_craft({
 		{"default:steel_ingot"},
 	}
 })
-
+]]
 -- Crystal Axe
 minetest.register_tool("ethereal:axe_crystal", {
 	description = S("Crystal Axe"),
@@ -122,8 +123,9 @@ minetest.register_tool("ethereal:axe_crystal", {
 		damage_groups = {fleshy = 7},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
-
+--[[
 minetest.register_craft({
 	output = 'ethereal:axe_crystal',
 	recipe = {
@@ -141,7 +143,7 @@ minetest.register_craft({
 		{'default:steel_ingot', ''},
 	}
 })
-
+]]
 -- Crystal Pick (This will last a while)
 minetest.register_tool("ethereal:pick_crystal", {
 	description = S("Crystal Pickaxe"),
@@ -160,8 +162,9 @@ minetest.register_tool("ethereal:pick_crystal", {
 		damage_groups = {fleshy = 6},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
-
+--[[
 minetest.register_craft({
 	output = "ethereal:pick_crystal",
 	recipe = {
@@ -170,7 +173,7 @@ minetest.register_craft({
 		{"", "default:steel_ingot", ""},
 	}
 })
-
+]]
 local old_handle_node_drops = minetest.handle_node_drops
 
 function minetest.handle_node_drops(pos, drops, digger)
@@ -203,8 +206,9 @@ minetest.register_tool("ethereal:shovel_crystal", {
 		damage_groups = {fleshy=4},
 	},
 	sound = {breaks = "default_tool_breaks"},
+	groups = {not_in_creative_inventory=1},
 })
-
+--[[
 minetest.register_craft({
 	output = "ethereal:shovel_crystal",
 	recipe = {
@@ -213,7 +217,7 @@ minetest.register_craft({
 		{"default:steel_ingot"},
 	}
 })
-
+]]
 -- Crystal Gilly Staff (replenishes air supply when used)
 minetest.register_tool("ethereal:crystal_gilly_staff", {
 	description = S("Crystal Gilly Staff"),
