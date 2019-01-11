@@ -1,9 +1,9 @@
-
+--[[
 minetest.register_on_mapgen_init(function(mapgen_params)
-	mapgen_params2={mgname="valleys", seed="73465682348566", water_level=mapgen_params.water_level, flags=mapgen_params.flags}
+	mapgen_params2={mgname="valleys", seed="", water_level=mapgen_params.water_level, flags=mapgen_params.flags}
 	minetest.set_mapgen_params(mapgen_params2)
 end)
-
+]]
 quests.register_quest("fliptest:beginning",{
 	title=minetest.colorize("#00ffff","The Beginning"),
 	description="Find out about your situation by reading the note.",
@@ -26,7 +26,6 @@ local note1text=""..
 "They did not under stand the implications of this however, and\n"..
 "their wish was granted by a nosy genie.\n"..
 "This is a story of you, and how you came to be in this world.\n\n"..
-"You seem to have popped up in a village.\n"
 
 minetest.register_craftitem("axiscore:note_1", {
 	description = minetest.colorize("#5fff00", "A short note on your situation"),
