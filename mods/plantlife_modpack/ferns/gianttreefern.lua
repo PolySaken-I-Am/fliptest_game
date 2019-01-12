@@ -219,7 +219,6 @@ minetest.register_node("ferns:fern_trunk_big_top", {
 	groups = {
 		tree=1,
 		choppy=2,
-		oddly_breakable_by_hand=2,
 		flammable=3,
 		wood=1,
 		not_in_creative_inventory=1,
@@ -249,7 +248,7 @@ minetest.register_node("ferns:fern_trunk_big", {
 		type = "fixed",
 		fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
 	},
-	groups = {tree=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1},
+	groups = {tree=1,choppy=2,flammable=3,wood=1},
 	sounds = default.node_sound_wood_defaults(),
 	after_destruct = function(pos,oldnode)
         local node = minetest.get_node({x=pos.x,y=pos.y+1,z=pos.z})

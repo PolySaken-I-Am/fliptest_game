@@ -366,7 +366,7 @@ beds.register_bed("campfire:sleeping_mat", {
 	},
 	selectionbox = {-0.5, -0.5, -0.5, 0.5, -0.35, 1.5},
 	recipe = {
-		{"wool:white", "wool:brown", "wool:brown"},
+		{'default:grass_1', 'group:leaves', 'group:leaves'}
 	},
 })
 end
@@ -382,4 +382,11 @@ minetest.register_craft({
 		{'group:stone','default:stick', 'group:stone'},
 		{'', 'group:stone', ''},
 	}
+})
+
+minetest.register_craft({
+	output = 'campfire:sleeping_mat_bottom',
+	recipe = {
+		{'default:grass_1', 'group:leaves', 'group:leaves'}
+	},
 })

@@ -9,7 +9,7 @@ minetest.register_node("ethereal:willow_trunk", {
 		"willow_trunk_top.png",
 		"willow_trunk.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -20,7 +20,7 @@ minetest.register_node("ethereal:willow_wood", {
 	description = S("Willow Wood"),
 	tiles = {"willow_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	groups = {wood = 1, choppy = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -37,7 +37,7 @@ minetest.register_node("ethereal:redwood_trunk", {
 		"redwood_trunk_top.png",
 		"redwood_trunk.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -48,7 +48,7 @@ minetest.register_node("ethereal:redwood_wood", {
 	description = S("Redwood Wood"),
 	tiles = {"redwood_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	groups = {wood = 1, choppy = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -65,7 +65,7 @@ minetest.register_node("ethereal:frost_tree", {
 		"ethereal_frost_tree_top.png",
 		"ethereal_frost_tree.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, put_out_fire = 1},
+	groups = {tree = 1, choppy = 2, put_out_fire = 1},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -76,7 +76,7 @@ minetest.register_node("ethereal:frost_wood", {
 	description = S("Frost Wood"),
 	tiles = {"frost_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, put_out_fire = 1},
+	groups = {wood = 1, choppy = 2, put_out_fire = 1},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -93,7 +93,7 @@ minetest.register_node("ethereal:yellow_trunk", {
 		"yellow_tree_top.png",
 		"yellow_tree.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, put_out_fire = 1},
+	groups = {tree = 1, choppy = 2, put_out_fire = 1},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -104,7 +104,7 @@ minetest.register_node("ethereal:yellow_wood", {
 	description = S("Healing Tree Wood"),
 	tiles = {"yellow_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, put_out_fire = 1},
+	groups = {wood = 1, choppy = 2, put_out_fire = 1},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -121,7 +121,7 @@ minetest.register_node("ethereal:palm_trunk", {
 		"moretrees_palm_trunk_top.png",
 		"moretrees_palm_trunk.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -132,7 +132,7 @@ minetest.register_node("ethereal:palm_wood", {
 	description = S("Palm Wood"),
 	tiles = {"moretrees_palm_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	groups = {wood = 1, choppy = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -149,7 +149,7 @@ minetest.register_node("ethereal:banana_trunk", {
 		"banana_trunk_top.png",
 		"banana_trunk.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -160,7 +160,7 @@ minetest.register_node("ethereal:banana_wood", {
 	description = S("Banana Wood"),
 	tiles = {"banana_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	groups = {wood = 1, choppy = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -177,7 +177,7 @@ minetest.register_node("ethereal:scorched_tree", {
 		"scorched_tree_top.png",
 		"scorched_tree.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 1},
+	groups = {tree = 1, choppy = 2, flammable = 1},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -200,7 +200,7 @@ minetest.register_node("ethereal:mushroom_trunk", {
 		"mushroom_trunk_top.png",
 		"mushroom_trunk.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -214,7 +214,7 @@ minetest.register_node("ethereal:birch_trunk", {
 		"moretrees_birch_trunk_top.png",
 		"moretrees_birch_trunk.png"
 	},
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
@@ -225,7 +225,7 @@ minetest.register_node("ethereal:birch_wood", {
 	description = S("Birch Wood"),
 	tiles = {"moretrees_birch_wood.png"},
 	is_ground_content = false,
-	groups = {wood = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	groups = {wood = 1, choppy = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -248,7 +248,7 @@ minetest.register_node("ethereal:bamboo", {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3}
 	},
-	groups = {choppy = 3, oddly_breakable_by_hand = 1, flammable = 2, tree = 1},
+	groups = {choppy = 3, flammable = 2, tree = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	after_dig_node = function(pos, node, metadata, digger)
 		default.dig_up(pos, node, digger)
