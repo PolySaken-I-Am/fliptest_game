@@ -348,7 +348,6 @@ quests.register_quest("fliptest:mithril",{
 	max=1,
 	autoaccept=true,
 	callback=function(playername, quest)
-		quests.start_quest(playername, "fliptest:q19")
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Create a basic pickaxe."))
+		
 	end,
 })
