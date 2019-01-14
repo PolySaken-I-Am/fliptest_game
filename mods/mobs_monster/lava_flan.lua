@@ -161,8 +161,9 @@ minetest.register_tool(":mobs:pick_lava", {
 		},
 		damage_groups = {fleshy=6},
 	},
+	groups={not_in_creative_inventory=1},
 })
-
+--[[
 minetest.register_craft({
 	output = "mobs:pick_lava",
 	recipe = {
@@ -171,7 +172,7 @@ minetest.register_craft({
 		{"", "default:obsidian_shard", ""},
 	}
 })
-
+]]
 -- Add [toolranks] mod support if found
 if minetest.get_modpath("toolranks") then
 

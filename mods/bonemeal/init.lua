@@ -566,7 +566,7 @@ minetest.register_craft({
 -- bonemeal (from player bones)
 minetest.register_craft({
 	type = "shapeless",
-	output = "bonemeal:bonemeal 4",
+	output = "bonemeal:bone 34",
 	recipe = {"bones:bones"},
 })
 

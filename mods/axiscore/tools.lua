@@ -37,6 +37,8 @@ axiscore.pickheads = {}
 axiscore.axeheads = {}
 axiscore.swordblades = {}
 axiscore.shovelheads = {}
+axiscore.plates = {}
+
 
 minetest.register_craftitem("axiscore:toolHandle_wood", {
 	description = "Wooden Tool Handle",
@@ -122,13 +124,37 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 		minetest.register_craft({
 			output = "axiscore:toolBinding_"..name,
 			recipe = {
-				{material, '', 'axiscore:craft_hammer'},
+				{'', 'axiscore:craft_hammer', 'axiscore:craft_knife'},
 				{'', material, ''},
-				{'', '', material},
+				{'', '', ''},
+			},
+			replacements = {{"axiscore:craft_hammer","axiscore:craft_hammer"},{"axiscore:craft_knife","axiscore:craft_knife"}}
+		})
+		table.insert(axiscore.bindings, "axiscore:toolBinding_"..name)
+	end
+	if not disallow.plate then
+		minetest.register_craftitem("axiscore:metalPlate_"..name, {
+			description = displayname.." Plate\n"..displayname2,
+			inventory_image = "axiscore_plate.png^[colorize:"..colorize,
+			groups = matgroups,
+			attributes = attributes,
+			name2=name,
+			displayname=displayname,
+			snappy=snappy,
+			choppy=choppy,
+			cracky=cracky,
+			crumbly=crumbly,
+		})
+		minetest.register_craft({
+			output = "axiscore:metalPlate_"..name,
+			recipe = {
+				{'', 'axiscore:craft_hammer', ''},
+				{'', material, ''},
+				{'', '', ''},
 			},
 			replacements = {{"axiscore:craft_hammer","axiscore:craft_hammer"}}
 		})
-		table.insert(axiscore.bindings, "axiscore:toolBinding_"..name)
+		table.insert(axiscore.plates, "axiscore:metalPlate_"..name)
 	end
 	if not disallow.pick then
 		minetest.register_craftitem("axiscore:pickHead_"..name, {
@@ -371,7 +397,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1,
-	 handle=1}
+	 handle=1,
+	 plate=1}
 )
 
 axiscore.register_tool_material(
@@ -449,7 +476,7 @@ axiscore.register_tool_material(
 	"#5622e6d0", 
 	{
 		{
-			name=minetest.colorize("#5622e6", "\nMythic"),
+			name=minetest.colorize("#af38ff", "\nMythic"),
 			type="nil",
 			func=function(pos, node, digger)
 			end,
@@ -457,6 +484,124 @@ axiscore.register_tool_material(
 	}, 
 	{}
 )
+
+axiscore.register_tool_material(
+	"default:mese_crystal", 
+	"mese", 
+	"Mese", 
+	"Mese", 
+	0.7, 
+	7, 
+	{times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=10, maxlevel=3}, -- snappy
+	{times={[1]=2.20, [2]=1.00, [3]=0.60}, uses=6, maxlevel=3}, -- choppy
+	{times={[1]=2.4, [2]=1.2, [3]=0.60}, uses=6, maxlevel=3}, -- cracky 
+	{times={[1]=1.20, [2]=0.60, [3]=0.30}, uses=6, maxlevel=3}, -- crumbly
+	{	
+		mese=1,
+		tool=1,
+	},
+	"#ffff00d0", 
+	{
+		{
+			name=minetest.colorize("#ffff00", "\nAlien"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1,
+	 handle=1,
+	 plate=1}
+)
+
+axiscore.register_tool_material(
+	"bonemeal:bone", 
+	"bone", 
+	"Boney", 
+	"Bone", 
+	0.99, 
+	8, 
+	{times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=6, maxlevel=2}, -- snappy
+	{times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=5, maxlevel=2}, -- choppy
+	{times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=5, maxlevel=2}, -- cracky 
+	{times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=6, maxlevel=2}, -- crumbly
+	{	
+		bone=1,
+		tool=1,
+	},
+	"#ffffffd0", 
+	{
+		{
+			name=minetest.colorize("#ffffff", "\nMorbid"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1,
+	 shovel=1,
+	 plate=1}
+)
+
+axiscore.register_tool_material(
+	"default:obsidian_shard", 
+	"obsidian", 
+	"Obsidian", 
+	"Obsidian", 
+	0.8, 
+	11, 
+	{times={[1]=3.0, [2]=2.00, [3]=0.70}, uses=9, maxlevel=3}, -- snappy
+	{times={[1]=3.20, [2]=2.00, [3]=0.90}, uses=5, maxlevel=3}, -- choppy
+	{times={[1]=3.4, [2]=2.4, [3]=0.90}, uses=5, maxlevel=3}, -- cracky 
+	{times={[1]=2.40, [2]=0.90, [3]=0.60}, uses=5, maxlevel=3}, -- crumbly
+	{	
+		obsidian=1,
+		tool=1,
+	},
+	"#200c49d0", 
+	{
+		{
+			name=minetest.colorize("#ff9900", "\nVolcanic"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1,
+	 handle=1,
+	 plate=1}
+)
+
+axiscore.register_tool_material(
+	"mobs:lava_orb", 
+	"lava", 
+	"Magmatic", 
+	"Lava", 
+	0.5, 
+	15, 
+	{times={[1]=0.80, [2]=0.20, [3]=0.10}, uses=40, maxlevel=3}, -- snappy
+	{times={[1]=1.80, [2]=0.80, [3]=0.40}, uses=40, maxlevel=3}, -- choppy
+	{times={[1]=1.80, [2]=0.80, [3]=0.40}, uses=40, maxlevel=3}, -- cracky 
+	{times={[1]=1.40, [2]=0.40, [3]=0.20}, uses=40, maxlevel=3}, -- crumbly
+	{	
+		lava=1,
+		tool=1,
+	},
+	"#ff7f00ef", 
+	{
+		{
+			name=minetest.colorize("#ff0000", "\nHellfire"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1,
+	 handle=1,
+	 plate=1}
+)
+
+
 
 local function tableHasKey(table,key)
     return table[key] ~= nil
