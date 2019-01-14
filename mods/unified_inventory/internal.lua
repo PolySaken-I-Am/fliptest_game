@@ -59,8 +59,8 @@ function unified_inventory.get_formspec(player, page)
 	local pagedef = unified_inventory.pages[page]
 
 	local formspec = {
-		"size[14,10]",
-		"background[-0.19,-0.25;14.4,10.75;ui_form_bg.png]" -- Background
+		"size[14,10]listcolors[#00000000;#00000000;#00000000;#374760;#ffffff]",
+		"background[-0.19,-0.25;14.4,10.75;ui_form_bg.png]"
 	}
 	local n = 3
 

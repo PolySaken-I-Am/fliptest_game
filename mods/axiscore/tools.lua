@@ -23,7 +23,7 @@ minetest.register_tool("axiscore:stone_club", {
 		max_drop_level=0,
 		groupcaps={
 		},
-		damage_groups = {fleshy=4},
+		damage_groups = {fleshy=3},
 	},
 	groups = {quest_tool=1},
 	sound = {breaks = "default_tool_breaks"},
@@ -42,7 +42,10 @@ minetest.register_craftitem("axiscore:toolHandle_wood", {
 	description = "Wooden Tool Handle",
 	inventory_image = "axiscore_toolhandle.png^[colorize:#775208df",
 	groups = {tool=1},
-	digging_groups={cracky = {times={[2]=2.0, [3]=1.00}, uses=6, maxlevel=1},},
+	snappy = {uses=6, maxlevel=1},
+	cracky = {uses=6, maxlevel=1},
+	choppy = {uses=6, maxlevel=1},
+	crumbly = {uses=6, maxlevel=1},
 	attributes = {},
 	name2="wood",
 	displayname="Wood",
@@ -54,7 +57,10 @@ minetest.register_craftitem("axiscore:toolBinding_string", {
 	description = "String Tool Binding",
 	inventory_image = "axiscore_toolbinding.png^[colorize:#165b0bdf",
 	groups = {tool=1},
-	digging_groups={cracky = {times={[2]=2.0, [3]=1.00}, uses=6, maxlevel=1},},
+	snappy = {uses=6, maxlevel=1},
+	cracky = {uses=6, maxlevel=1},
+	choppy = {uses=6, maxlevel=1},
+	crumbly = {uses=6, maxlevel=1},
 	attributes = {},
 	name2="string",
 	displayname="String",
@@ -66,7 +72,7 @@ minetest.register_craftitem("axiscore:pickHead_stone", {
 	description = "Stone Pickaxe Head",
 	inventory_image = "axiscore_pickhead.png^[colorize:#555555df",
 	groups = {stone=1, tool=1},
-	digging_groups={cracky = {times={[2]=7.0, [3]=5.00}, uses=6, maxlevel=1},},
+	cracky = {times={[2]=7.0, [3]=5.00}, uses=6, maxlevel=1},
 	attributes = {},
 	name2="stone",
 	displayname="Basic",
@@ -75,15 +81,19 @@ minetest.register_craftitem("axiscore:pickHead_stone", {
 table.insert(axiscore.pickheads, "axiscore:pickHead_stone")
 
 
-function axiscore.register_tool_material(material, name, displayname, displayname2, durability, cooldown, sworddamage, digging_groups, matgroups, colorize, attributes, disallow)
+function axiscore.register_tool_material(material, name, displayname, displayname2, cooldown, sworddamage, snappy, choppy, cracky, crumbly, matgroups, colorize, attributes, disallow)
 	if not disallow.handle then
 		minetest.register_craftitem("axiscore:toolHandle_"..name, {
 			description = displayname.." Tool Handle\n"..displayname2,
 			inventory_image = "axiscore_toolhandle.png^[colorize:"..colorize,
 			groups = matgroups,
+			attributes = attributes,
 			name2=name,
 			displayname=displayname,
-			digging_groups=digging_groups,
+			snappy=snappy,
+			choppy=choppy,
+			cracky=cracky,
+			crumbly=crumbly,
 		})
 		minetest.register_craft({
 			output = "axiscore:toolHandle_"..name,
@@ -101,9 +111,13 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			description = displayname.." Tool Binding\n"..displayname2,
 			inventory_image = "axiscore_toolbinding.png^[colorize:"..colorize,
 			groups = matgroups,
+			attributes = attributes,
 			name2=name,
 			displayname=displayname,
-			digging_groups=digging_groups,
+			snappy=snappy,
+			choppy=choppy,
+			cracky=cracky,
+			crumbly=crumbly,
 		})
 		minetest.register_craft({
 			output = "axiscore:toolBinding_"..name,
@@ -125,6 +139,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			attributes = attributes,
 			name2=name,
 			displayname=displayname,
+			cracky=cracky,
+			material=material,
 		})
 		minetest.register_craft({
 			output = "axiscore:pickHead_"..name,
@@ -148,6 +164,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			cooldown=cooldown*1.5,
 			damage=sworddamage*1.2,
 			displayname=displayname,
+			choppy=choppy,
+			material=material,
 		})
 		minetest.register_craft({
 			output = "axiscore:axeHead_"..name,
@@ -169,6 +187,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			attributes = attributes,
 			name2=name,
 			displayname=displayname,
+			crumbly=crumbly,
+			material=material,
 		})
 		minetest.register_craft({
 			output = "axiscore:shovelHead_"..name,
@@ -192,6 +212,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			cooldown=cooldown,
 			sworddamage=sworddamage,
 			displayname=displayname,
+			snappy=snappy,
+			material=material,
 		})
 		minetest.register_craft({
 			output = "axiscore:swordBlade_"..name,
@@ -211,15 +233,12 @@ axiscore.register_tool_material(
 	"steel", 
 	"Steel", 
 	"Steel", 
-	20, 
 	0.8, 
 	6, 
-	{
-		snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=10, maxlevel=2},
-		choppy={times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=6, maxlevel=2},
-		crumbly = {times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=10, maxlevel=2},
-		cracky = {times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=6, maxlevel=2},
-	}, 
+	{times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=10, maxlevel=2}, -- snappy
+	{times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=6, maxlevel=2}, -- choppy
+	{times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=6, maxlevel=2}, -- cracky 
+	{times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=10, maxlevel=2}, -- crumbly
 	{	
 		metal=1,
 		steel=1,
@@ -228,16 +247,220 @@ axiscore.register_tool_material(
 	"#ffffff00", 
 	{
 		{
-			name="Ferrous", 
+			name="\nFerrous",
+			type="pick",
 			func=function(pos, node, digger)
 				if node.name=="default:stone_with_iron" then
 					digger:get_inventory():add_item("main", "default:iron_lump")
 				end
-			end
+				return true
+			end,
 		}
 	}, 
 	{}
 )
+
+axiscore.register_tool_material(
+	"default:bronze_ingot", 
+	"bronze", 
+	"Bronze", 
+	"Bronze", 
+	0.8, 
+	4, 
+	{times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=13, maxlevel=2}, -- snappy
+	{times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=10, maxlevel=2}, -- choppy
+	{times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=10, maxlevel=2}, -- cracky
+	{times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=13, maxlevel=2}, -- crumbly
+	{	
+		metal=1,
+		bronze=1,
+		tin=1,
+		copper=1,
+		tool=1,
+	},
+	"#c1800fd0", 
+	{
+		{
+			name=minetest.colorize("#c1800f", "\nComposite"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{}
+)
+
+axiscore.register_tool_material(
+	"default:copper_ingot", 
+	"copper", 
+	"Copper", 
+	"Copper", 
+	0.8, 
+	4, 
+	{times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=9, maxlevel=2}, -- snappy
+	{times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=5, maxlevel=2}, -- choppy
+	{times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=5, maxlevel=2}, -- cracky
+	{times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=8, maxlevel=2}, -- crumbly
+	{	
+		metal=1,
+		copper=1,
+		tool=1,
+	},
+	"#e29714d0", 
+	{
+		{
+			name=minetest.colorize("#e29714", "\nConductive"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{}
+)
+
+axiscore.register_tool_material(
+	"default:tin_ingot", 
+	"tin", 
+	"Tin", 
+	"Tin", 
+	0.9, 
+	7, 
+	{times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=10, maxlevel=2}, -- snappy
+	{times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=6, maxlevel=2}, -- choppy
+	{times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=10, maxlevel=2}, -- cracky
+	{times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=13, maxlevel=2}, -- crumbly
+	{	
+		metal=1,
+		tin=1,
+		tool=1,
+	},
+	"#aaaaaad0", 
+	{
+		{
+			name=minetest.colorize("#c1800f", "\nPapercut"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{}
+)
+
+axiscore.register_tool_material(
+	"ethereal:crystal_ingot", 
+	"crystal", 
+	"Crystalline", 
+	"Crystal", 
+	0.6, 
+	10, 
+	{times={[1]=1.70, [2]=0.70, [3]=0.25}, uses=17, maxlevel=3}, -- snappy
+	{times={[1]=2.00, [2]=0.80, [3]=0.40}, uses=13, maxlevel=3}, -- choppy
+	{times={[1]=1.8, [2]=0.8, [3]=0.40}, uses=13, maxlevel=3}, -- cracky 
+	{times={[1]=1.10, [2]=0.50, [3]=0.30}, uses=10, maxlevel=3}, -- crumbly
+	{	
+		crystal=1,
+		tool=1,
+	},
+	"#59dbf2d0", 
+	{
+		{
+			name=minetest.colorize("#59dbf2", "\nRefractive"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1,
+	 handle=1}
+)
+
+axiscore.register_tool_material(
+	"default:gold_ingot", 
+	"gold", 
+	"Gold", 
+	"Gold", 
+	0.8, 
+	4, 
+	{times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=10, maxlevel=2}, -- snappy
+	{times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=6, maxlevel=2}, -- choppy
+	{times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=6, maxlevel=2}, -- cracky
+	{times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=9, maxlevel=2}, -- crumbly
+	{	
+		metal=1,
+		gold=1,
+		tool=1,
+	},
+	"#e5ce00d0", 
+	{
+		{
+			name=minetest.colorize("#e5ce00", "\nExpensive"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{}
+)
+
+axiscore.register_tool_material(
+	"moreores:silver_ingot", 
+	"silver", 
+	"Silver", 
+	"Silver", 
+	1.0, 
+	6, 
+	{times = {[2] = 0.70, [3] = 0.30}, uses = 33, maxlevel= 1}, -- snappy
+	{times = {[1] = 2.50, [2] = 0.80, [3] = 0.50}, uses = 33, maxlevel= 1}, -- choppy
+	{times = {[1] = 2.60, [2] = 1.00, [3] = 0.60}, uses = 33, maxlevel= 1}, -- cracky 
+	{times = {[1] = 1.10, [2] = 0.40, [3] = 0.25}, uses = 33, maxlevel= 1}, -- crumbly
+	{	
+		metal=1,
+		silver=1,
+		tool=1,
+	},
+	"#c9d6ddd0", 
+	{
+		{
+			name=minetest.colorize("#c9d6dd", "\nWolfsbane"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{}
+)
+
+axiscore.register_tool_material(
+	"moreores:mithril_ingot", 
+	"mithril", 
+	"Mithril", 
+	"Mithril", 
+	0.45, 
+	9, 
+	{times = {[2] = 0.70, [3] = 0.25}, uses = 66, maxlevel= 2}, -- snappy
+	{times = {[1] = 1.75, [2] = 0.45, [3] = 0.45}, uses = 66, maxlevel= 2}, -- choppy
+	{times = {[1] = 2.25, [2] = 0.55, [3] = 0.35}, uses = 66, maxlevel= 2}, -- cracky 
+	{times = {[1] = 0.70, [2] = 0.35, [3] = 0.20}, uses = 66, maxlevel= 2}, -- crumbly
+	{	
+		metal=1,
+		mithril=1,
+		tool=1,
+	},
+	"#5622e6d0", 
+	{
+		{
+			name=minetest.colorize("#5622e6", "\nMythic"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{}
+)
+
+local function tableHasKey(table,key)
+    return table[key] ~= nil
+end
 
 for _,head in ipairs(axiscore.pickheads) do
 	for __,binding in ipairs(axiscore.bindings) do
@@ -245,46 +468,68 @@ for _,head in ipairs(axiscore.pickheads) do
 			local head_def = ItemStack(head):get_definition()
 			local binding_def = ItemStack(binding):get_definition()
 			local handle_def = ItemStack(handle):get_definition()
-			local attrlist = ""
-			local fnc = {}
+			local attrlist = {}
 			for _,attr in ipairs(head_def.attributes) do
 				if attr.name then
-					attrlist=attrlist..attr.name.."\n"
-					if attr.func then
-						table.insert(fnc, attr.func)
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
 					end
 				end
 			end
+			for _,attr in ipairs(binding_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(handle_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			local attrpt=""
+			for a,n in pairs(attrlist) do
+				attrpt=attrpt..a.." "..n.level
+			end
 			if head=="axiscore:pickHead_stone" and handle=="axiscore:toolHandle_wood" and binding=="axiscore:toolBinding_string" then
 				minetest.register_tool("axiscore:pick_".._..__..___, {
-					description = head_def.displayname.." Pickaxe\n"..attrlist,
+					description = head_def.displayname.." Pickaxe"..attrpt,
 					inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
 					tool_capabilities = {
 						full_punch_interval = 1.2,
 						max_drop_level=0,
 						groupcaps={
-							cracky = {times={[1]=head_def.digging_groups.cracky.times[1], [2]=head_def.digging_groups.cracky.times[2], [3]=head_def.digging_groups.cracky.times[3]}, uses=head_def.digging_groups.cracky.uses+handle_def.digging_groups.cracky.uses+binding_def.digging_groups.cracky.uses, maxlevel=head_def.digging_groups.maxlevel},
+							cracky = {times={[1]=head_def.cracky.times[1], [2]=head_def.cracky.times[2], [3]=head_def.cracky.times[3]}, uses=head_def.cracky.uses+handle_def.cracky.uses+binding_def.cracky.uses, maxlevel=head_def.cracky.maxlevel},
 						},
 						damage_groups = {fleshy=2},
 					},
 					sound = {breaks = "default_tool_breaks"},
-					special=fnc
+					attributes=attrlist,
 				})
 			else
 				minetest.register_tool("axiscore:pick_".._..__..___, {
-					description = head_def.displayname.." Pickaxe\n"..attrlist,
+					description = head_def.displayname.." Pickaxe"..attrpt,
 					inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
 					tool_capabilities = {
 						full_punch_interval = 1.2,
 						max_drop_level=0,
 						groupcaps={
-							cracky = {times={[1]=head_def.digging_groups.cracky.times[1], [2]=head_def.digging_groups.cracky.times[2], [3]=head_def.digging_groups.cracky.times[3]}, uses=head_def.digging_groups.cracky.uses+handle_def.digging_groups.cracky.uses+binding_def.digging_groups.cracky.uses, maxlevel=head_def.digging_groups.maxlevel},
+							cracky = {times={[1]=head_def.cracky.times[1], [2]=head_def.cracky.times[2], [3]=head_def.cracky.times[3]}, uses=head_def.cracky.uses+handle_def.cracky.uses+binding_def.cracky.uses, maxlevel=head_def.cracky.maxlevel},
 						},
 						damage_groups = {fleshy=2},
 					},
 					groups = {not_in_creative_inventory=1},
 					sound = {breaks = "default_tool_breaks"},
-					special=fnc
+					attributes=attrlist,
 				})
 			end
 			minetest.register_craft({
@@ -294,6 +539,263 @@ for _,head in ipairs(axiscore.pickheads) do
 					{'', binding, ''},
 					{'', handle, ''},
 				},
+			})
+			minetest.register_craft({
+				output = "axiscore:pick_".._..__..___,
+				type="shapeless",
+				recipe = {"axiscore:pick_".._..__..___, head_def.material,},
+			})
+		end
+	end
+end
+
+minetest.register_on_dignode(function(pos, node, digger)
+	local stack = digger:get_wielded_item()
+	if string.split(stack:get_name(), "_")[1]=="axiscore:pick" then
+		for _,attr in ipairs(stack:get_definition().attributes) do
+			if attr.type=="pick" or attr.type=="all" then
+				for i=1,attr.level do
+					attr.func(pos, node, digger)
+				end
+			end
+		end
+	end
+end)
+
+
+
+for _,head in ipairs(axiscore.axeheads) do
+	for __,binding in ipairs(axiscore.bindings) do
+		for ___,handle in ipairs(axiscore.handles) do
+			local head_def = ItemStack(head):get_definition()
+			local binding_def = ItemStack(binding):get_definition()
+			local handle_def = ItemStack(handle):get_definition()
+			local attrlist = {}
+			for _,attr in ipairs(head_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(binding_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(handle_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			local attrpt=""
+			for a,n in pairs(attrlist) do
+				attrpt=attrpt..a.." "..n.level
+			end
+			minetest.register_tool("axiscore:axe_".._..__..___, {
+				description = head_def.displayname.." Axe"..attrpt,
+				inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
+				tool_capabilities = {
+					full_punch_interval = head_def.cooldown,
+					max_drop_level=0,
+					groupcaps={
+						choppy = {times={[1]=head_def.choppy.times[1], [2]=head_def.choppy.times[2], [3]=head_def.choppy.times[3]}, uses=head_def.choppy.uses+handle_def.choppy.uses+binding_def.choppy.uses, maxlevel=head_def.choppy.maxlevel},
+					},
+					damage_groups = {fleshy=head_def.damage},
+				},
+				groups = {not_in_creative_inventory=1},
+				sound = {breaks = "default_tool_breaks"},
+				attributes=attrlist,
+			})
+			minetest.register_craft({
+				output = "axiscore:axe_".._..__..___,
+				recipe = {
+					{'', head, ''},
+					{'', binding, ''},
+					{'', handle, ''},
+				},
+			})
+			minetest.register_craft({
+				output = "axiscore:axe_".._..__..___,
+				type="shapeless",
+				recipe = {"axiscore:axe_".._..__..___, head_def.material,},
+			})
+		end
+	end
+end
+
+minetest.register_on_dignode(function(pos, node, digger)
+	local stack = digger:get_wielded_item()
+	if string.split(stack:get_name(), "_")[1]=="axiscore:axe" then
+		for _,attr in ipairs(stack:get_definition().attributes) do
+			if attr.type=="axe" or attr.type=="all" then
+				for i=1,attr.level do
+					attr.func(pos, node, digger)
+				end
+			end
+		end
+	end
+end)
+
+
+for _,head in ipairs(axiscore.shovelheads) do
+	for __,binding in ipairs(axiscore.bindings) do
+		for ___,handle in ipairs(axiscore.handles) do
+			local head_def = ItemStack(head):get_definition()
+			local binding_def = ItemStack(binding):get_definition()
+			local handle_def = ItemStack(handle):get_definition()
+			local attrlist = {}
+			for _,attr in ipairs(head_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(binding_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(handle_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			local attrpt=""
+			for a,n in pairs(attrlist) do
+				attrpt=attrpt..a.." "..n.level
+			end
+			minetest.register_tool("axiscore:shovel_".._..__..___, {
+				description = head_def.displayname.." Shovel"..attrpt,
+				inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
+				tool_capabilities = {
+					full_punch_interval = head_def.cooldown,
+					max_drop_level=0,
+					groupcaps={
+						crumbly = {times={[1]=head_def.crumbly.times[1], [2]=head_def.crumbly.times[2], [3]=head_def.crumbly.times[3]}, uses=head_def.crumbly.uses+handle_def.crumbly.uses+binding_def.crumbly.uses, maxlevel=head_def.crumbly.maxlevel},
+					},
+					damage_groups = {fleshy=2},
+				},
+				groups = {not_in_creative_inventory=1},
+				sound = {breaks = "default_tool_breaks"},
+				attributes=attrlist,
+			})
+			minetest.register_craft({
+				output = "axiscore:shovel_".._..__..___,
+				recipe = {
+					{'', head, ''},
+					{'', binding, ''},
+					{'', handle, ''},
+				},
+			})
+			minetest.register_craft({
+				output = "axiscore:shovel_".._..__..___,
+				type="shapeless",
+				recipe = {"axiscore:shovel_".._..__..___, head_def.material,},
+			})
+		end
+	end
+end
+
+minetest.register_on_dignode(function(pos, node, digger)
+	local stack = digger:get_wielded_item()
+	if string.split(stack:get_name(), "_")[1]=="axiscore:shovel" then
+		for _,attr in ipairs(stack:get_definition().attributes) do
+			if attr.type=="shovel" or attr.type=="all" then
+				for i=1,attr.level do
+					attr.func(pos, node, digger)
+				end
+			end
+		end
+	end
+end)
+
+for _,head in ipairs(axiscore.swordblades) do
+	for __,binding in ipairs(axiscore.bindings) do
+		for ___,handle in ipairs(axiscore.handles) do
+			local head_def = ItemStack(head):get_definition()
+			local binding_def = ItemStack(binding):get_definition()
+			local handle_def = ItemStack(handle):get_definition()
+			local attrlist = {}
+			for _,attr in ipairs(head_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(binding_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(handle_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			local attrpt=""
+			for a,n in pairs(attrlist) do
+				attrpt=attrpt..a.." "..n.level
+			end
+			minetest.register_tool("axiscore:sword_".._..__..___, {
+				description = head_def.displayname.." Sword"..attrpt,
+				inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
+				tool_capabilities = {
+					full_punch_interval = head_def.cooldown,
+					max_drop_level=0,
+					groupcaps={
+						snappy = {times={[1]=head_def.snappy.times[1], [2]=head_def.snappy.times[2], [3]=head_def.snappy.times[3]}, uses=head_def.snappy.uses+handle_def.snappy.uses+binding_def.snappy.uses, maxlevel=head_def.snappy.maxlevel},
+					},
+					damage_groups = {fleshy=head_def.sworddamage},
+				},
+				groups = {not_in_creative_inventory=1},
+				sound = {breaks = "default_tool_breaks"},
+				attributes=attrlist,
+			})
+			minetest.register_craft({
+				output = "axiscore:sword_".._..__..___,
+				recipe = {
+					{'', head, ''},
+					{'', binding, ''},
+					{'', handle, ''},
+				},
+			})
+			minetest.register_craft({
+				output = "axiscore:sword_".._..__..___,
+				type="shapeless",
+				recipe = {"axiscore:sword_".._..__..___, head_def.material,},
 			})
 		end
 	end
