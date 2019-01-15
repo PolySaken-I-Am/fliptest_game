@@ -83,7 +83,7 @@ minetest.register_craftitem("axiscore:pickHead_stone", {
 table.insert(axiscore.pickheads, "axiscore:pickHead_stone")
 
 
-function axiscore.register_tool_material(material, name, displayname, displayname2, cooldown, sworddamage, snappy, choppy, cracky, crumbly, matgroups, colorize, attributes, disallow)
+function axiscore.register_tool_material(material, name, displayname, displayname2, cooldown, sworddamage, snappy, choppy, cracky, crumbly, matgroups, colorize, attributes, disallow, armor)
 	if not disallow.handle then
 		minetest.register_craftitem("axiscore:toolHandle_"..name, {
 			description = displayname.." Tool Handle\n"..displayname2,
@@ -144,6 +144,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			choppy=choppy,
 			cracky=cracky,
 			crumbly=crumbly,
+			armor=armor,
+			colorize=colorize,
 		})
 		minetest.register_craft({
 			output = "axiscore:metalPlate_"..name,
@@ -229,7 +231,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 	end
 	if not disallow.sword then
 		minetest.register_craftitem("axiscore:swordBlade_"..name, {
-			description = displayname.." Sword Blade\n"..displayname2,
+			description = displayname.." Sword Blade\n"..displayname2.."\n+"..sworddamage.." Attack Damage",
 			inventory_image = "axiscore_swordhead.png^[colorize:"..colorize,
 			groups = matgroups,
 			digging_groups=digging_groups,
@@ -283,7 +285,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{	
+		groups = {armor_heal=0, armor_use=1600, physics_speed=-0.03, physics_gravity=0.03},
+		armor_groups = {fleshy=15},
+		damage_groups = {cracky=2, snappy=3, choppy=2, crumbly=1, level=2},
+	}
 )
 
 axiscore.register_tool_material(
@@ -313,7 +320,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{	
+		groups = {armor_heal=6, armor_use=800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=15},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
 )
 
 axiscore.register_tool_material(
@@ -341,7 +353,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
 )
 
 axiscore.register_tool_material(
@@ -369,7 +386,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{	
+		groups = { armor_heal=6, armor_use=1600, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=13},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
 )
 
 axiscore.register_tool_material(
@@ -398,7 +420,8 @@ axiscore.register_tool_material(
 	}, 
 	{binding=1,
 	 handle=1,
-	 plate=1}
+	 plate=1},
+	 nil
 )
 
 axiscore.register_tool_material(
@@ -426,7 +449,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
 )
 
 axiscore.register_tool_material(
@@ -454,7 +482,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{	
+		groups = {armor_heal=0, armor_use=900, physics_speed=-0.03, physics_gravity=0.03},
+		armor_groups = {fleshy=15},
+		damage_groups = {cracky=2, snappy=3, choppy=2, crumbly=1, level=2},
+	}
 )
 
 axiscore.register_tool_material(
@@ -482,7 +515,12 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{}
+	{},
+	{
+		groups = {armor_heal=12, armor_use=100, not_in_creative_inventory=1}, 
+		armor_groups = {fleshy=20},
+		damage_groups = {cracky=2, snappy=1, level=3},
+	}
 )
 
 axiscore.register_tool_material(
@@ -511,7 +549,8 @@ axiscore.register_tool_material(
 	}, 
 	{binding=1,
 	 handle=1,
-	 plate=1}
+	 plate=1},
+	 nil
 )
 
 axiscore.register_tool_material(
@@ -540,7 +579,8 @@ axiscore.register_tool_material(
 	}, 
 	{binding=1,
 	 shovel=1,
-	 plate=1}
+	 plate=1},
+	 nil
 )
 
 axiscore.register_tool_material(
@@ -569,7 +609,8 @@ axiscore.register_tool_material(
 	}, 
 	{binding=1,
 	 handle=1,
-	 plate=1}
+	 plate=1},
+	 nil
 )
 
 axiscore.register_tool_material(
@@ -597,8 +638,12 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1,
-	 handle=1,
-	 plate=1}
+	 handle=1},
+	{
+		groups = {armor_heal=20, armor_use=50, not_in_creative_inventory=1}, 
+		armor_groups = {fleshy=30},
+		damage_groups = {cracky=2, snappy=1, level=3},
+	}
 )
 
 
@@ -756,7 +801,7 @@ for _,head in ipairs(axiscore.axeheads) do
 					groupcaps={
 						choppy = {times={[1]=head_def.choppy.times[1], [2]=head_def.choppy.times[2], [3]=head_def.choppy.times[3]}, uses=head_def.choppy.uses+handle_def.choppy.uses+binding_def.choppy.uses, maxlevel=head_def.choppy.maxlevel},
 					},
-					damage_groups = {fleshy=head_def.damage},
+					damage_groups = {fleshy=2},
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
@@ -915,7 +960,7 @@ for _,head in ipairs(axiscore.swordblades) do
 				attrpt=attrpt..a.." "..n.level
 			end
 			minetest.register_tool("axiscore:sword_".._..__..___, {
-				description = head_def.displayname.." Sword"..attrpt,
+				description = head_def.displayname.." Sword"..attrpt.."\n+"..head_def.sworddamage.." Attack Damage",
 				inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
 				tool_capabilities = {
 					full_punch_interval = head_def.cooldown,
@@ -945,3 +990,4 @@ for _,head in ipairs(axiscore.swordblades) do
 		end
 	end
 end
+
