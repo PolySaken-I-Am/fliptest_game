@@ -120,6 +120,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 		minetest.register_craftitem("axiscore:metalPlate_"..name, {
 			description = displayname.." Plate\n"..displayname2,
 			inventory_image = "axiscore_plate.png^[colorize:"..colorize,
+			inventory_image2 = "axiscore_cap.png^[colorize:"..colorize,
+			inventory_image3 = "axiscore_butt.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -251,6 +253,7 @@ axiscore.register_tool_material(
 		metal=1,
 		steel=1,
 		tool=1,
+		qn_output=1,
 	},
 	"#ffffff00", 
 	{
@@ -275,7 +278,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"default:wood", 
-	"appple wood", 
+	"apple_wood", 
 	"Apple Wood", 
 	"Apple Wood", 
 	1, 
@@ -285,7 +288,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		apple=1,
 		tool=1,
 		qn_cost=1,
@@ -310,7 +313,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"default:acacia_wood", 
-	"acacia wood", 
+	"acacia_wood", 
 	"Acacia Wood", 
 	"Acacia Wood", 
 	1, 
@@ -320,7 +323,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		acacia=1,
 		tool=1,
 		qn_cost=3,
@@ -345,7 +348,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"default:pine_wood", 
-	"pine wood", 
+	"pine_wood", 
 	"Pine Wood", 
 	"Pine Wood", 
 	1, 
@@ -355,7 +358,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		pine=1,
 		tool=1,
 		qn_cost=2,
@@ -380,7 +383,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"default:jungle_wood", 
-	"jungle wood", 
+	"jungle_wood", 
 	"Jungle Wood", 
 	"Jungle Wood", 
 	1, 
@@ -390,7 +393,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		jungle=1,
 		tool=1,
 		qn_cost=2,
@@ -415,7 +418,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"default:aspen_wood", 
-	"aspen wood", 
+	"aspen_wood", 
 	"Aspen Wood", 
 	"Aspen Wood", 
 	1, 
@@ -425,7 +428,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		aspen=1,
 		tool=1,
 		qn_cost=1,
@@ -450,7 +453,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"dfcaverns:black_cap_wood", 
-	"blackcap wood", 
+	"blackcap_wood", 
 	"Black Cap Wood", 
 	"Black Cap Wood", 
 	1, 
@@ -460,7 +463,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		blackcap=1,
 		tool=1,
 		qn_cost=1,
@@ -485,7 +488,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"dfcaverns:blood_thorn_wood", 
-	"blood thorn wood", 
+	"bloodthorn_wood", 
 	"Blood Thorn Wood", 
 	"Blood Thorn Wood", 
 	1, 
@@ -495,7 +498,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		bloodthorn=1,
 		tool=1,
 		qn_cost=1,
@@ -518,44 +521,11 @@ axiscore.register_tool_material(
 	}
 )
 
-axiscore.register_tool_material(
-	"dfcaverns:blood_thorn_wood", 
-	"blood thorn wood", 
-	"Blood Thorn Wood", 
-	"Blood Thorn Wood", 
-	1, 
-	2, 
-	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
-	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
-	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
-	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
-	{	
-		wood=1,
-		bloodthorn=1,
-		tool=1,
-		qn_cost=1,
-		qn_efficiency=5,
-	},
-	"#5b0606d0", 
-	{
-		{
-			name=minetest.colorize("#5b0606", "\nVisceral"),
-			type="nil",
-			func=function(pos, node, digger)
-			end,
-		}
-	}, 
-	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
-)
+
 
 axiscore.register_tool_material(
 	"ethereal:frost_wood", 
-	"frost wood", 
+	"frost_wood", 
 	"Frost Wood", 
 	"Frost Wood", 
 	1, 
@@ -565,7 +535,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		frost=1,
 		tool=1,
 		qn_cost=2,
@@ -590,7 +560,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"ethereal:redwood_wood", 
-	"redwood wood", 
+	"redwood_wood", 
 	"Redwood Wood", 
 	"Redwood Wood", 
 	1, 
@@ -600,7 +570,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		redwood=1,
 		tool=1,
 		qn_cost=1,
@@ -625,7 +595,7 @@ axiscore.register_tool_material(
 
 axiscore.register_tool_material(
 	"ethereal:yellow_wood", 
-	"healing", 
+	"healing_wood", 
 	"Healing Wood", 
 	"Healing Wood", 
 	1, 
@@ -635,7 +605,7 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		wood=1,
+		woodhandle=1,
 		healing=1,
 		tool=1,
 		qn_cost=1,
@@ -675,6 +645,7 @@ axiscore.register_tool_material(
 		tin=1,
 		copper=1,
 		tool=1,
+		qn_output=2,
 	},
 	"#c1800fd0", 
 	{
@@ -708,6 +679,7 @@ axiscore.register_tool_material(
 		metal=1,
 		copper=1,
 		tool=1,
+		qn_output=3,
 	},
 	"#e29714d0", 
 	{
@@ -741,6 +713,7 @@ axiscore.register_tool_material(
 		metal=1,
 		tin=1,
 		tool=1,
+		qn_output=1,
 	},
 	"#aaaaaad0", 
 	{
@@ -804,6 +777,7 @@ axiscore.register_tool_material(
 		metal=1,
 		gold=1,
 		tool=1,
+		qn_output=5,
 	},
 	"#e5ce00d0", 
 	{
@@ -837,6 +811,7 @@ axiscore.register_tool_material(
 		metal=1,
 		silver=1,
 		tool=1,
+		qn_output=4,
 	},
 	"#c9d6ddd0", 
 	{
@@ -870,6 +845,7 @@ axiscore.register_tool_material(
 		metal=1,
 		mithril=1,
 		tool=1,
+		qn_output=5,
 	},
 	"#5622e6d0", 
 	{
@@ -992,6 +968,7 @@ axiscore.register_tool_material(
 	{	
 		lava=1,
 		tool=1,
+		qn_output=1,
 	},
 	"#ff7f00ef", 
 	{
