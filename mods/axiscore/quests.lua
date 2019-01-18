@@ -351,3 +351,9 @@ quests.register_quest("fliptest:mithril",{
 		
 	end,
 })
+
+minetest.register_on_dignode(function(pos, node, digger)
+	if node.name=="moreores:mineral_mithril" then
+		quests.update_quest(digger:get_player_name(), "fliptest:mithril", 1)
+	end
+end)
