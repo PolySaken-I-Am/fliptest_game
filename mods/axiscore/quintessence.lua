@@ -25,3 +25,8 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+
+minetest.register_craftitem("axiscore:toolHandle_wood", {
+	description = "Wooden Tool Handle",
+	inventory_image = "axiscore_toolhandle.png^[colorize:#775208df",
+})

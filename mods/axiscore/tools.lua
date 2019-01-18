@@ -39,22 +39,6 @@ axiscore.swordblades = {}
 axiscore.shovelheads = {}
 axiscore.plates = {}
 
-
-minetest.register_craftitem("axiscore:toolHandle_wood", {
-	description = "Wooden Tool Handle",
-	inventory_image = "axiscore_toolhandle.png^[colorize:#775208df",
-	groups = {tool=1},
-	snappy = {uses=6, maxlevel=1},
-	cracky = {uses=6, maxlevel=1},
-	choppy = {uses=6, maxlevel=1},
-	crumbly = {uses=6, maxlevel=1},
-	attributes = {},
-	name2="wood",
-	displayname="Wood",
-})
-
-table.insert(axiscore.handles, "axiscore:toolHandle_wood")
-
 minetest.register_craftitem("axiscore:toolBinding_string", {
 	description = "String Tool Binding",
 	inventory_image = "axiscore_toolbinding.png^[colorize:#165b0bdf",
@@ -286,6 +270,391 @@ axiscore.register_tool_material(
 		groups = {armor_heal=0, armor_use=1600, physics_speed=-0.03, physics_gravity=0.03},
 		armor_groups = {fleshy=15},
 		damage_groups = {cracky=2, snappy=3, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"default:wood", 
+	"appple wood", 
+	"Apple Wood", 
+	"Apple Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		apple=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=1,
+	},
+	"#775208d0", 
+	{
+		{
+			name=minetest.colorize("#775208", "\nDendric"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"default:acacia_wood", 
+	"acacia wood", 
+	"Acacia Wood", 
+	"Acacia Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		acacia=1,
+		tool=1,
+		qn_cost=3,
+		qn_efficiency=5,
+	},
+	"#c6401bd0", 
+	{
+		{
+			name=minetest.colorize("#c6401b", "\nBloodrite"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"default:pine_wood", 
+	"pine wood", 
+	"Pine Wood", 
+	"Pine Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		pine=1,
+		tool=1,
+		qn_cost=2,
+		qn_efficiency=1,
+	},
+	"#e8d8abd0", 
+	{
+		{
+			name=minetest.colorize("#e8d8ab", "\nSticky"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"default:jungle_wood", 
+	"jungle wood", 
+	"Jungle Wood", 
+	"Jungle Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		jungle=1,
+		tool=1,
+		qn_cost=2,
+		qn_efficiency=2,
+	},
+	"#663636d0", 
+	{
+		{
+			name=minetest.colorize("#663636", "\nDense"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"default:aspen_wood", 
+	"aspen wood", 
+	"Aspen Wood", 
+	"Aspen Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		aspen=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=2,
+	},
+	"#fffdefd0", 
+	{
+		{
+			name=minetest.colorize("#fffdef", "\nLight"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:black_cap_wood", 
+	"blackcap wood", 
+	"Black Cap Wood", 
+	"Black Cap Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		blackcap=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=5,
+	},
+	"#2c073ad0", 
+	{
+		{
+			name=minetest.colorize("#2c073a", "\nUmbral"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:blood_thorn_wood", 
+	"blood thorn wood", 
+	"Blood Thorn Wood", 
+	"Blood Thorn Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		bloodthorn=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=5,
+	},
+	"#5b0606d0", 
+	{
+		{
+			name=minetest.colorize("#5b0606", "\nVisceral"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:blood_thorn_wood", 
+	"blood thorn wood", 
+	"Blood Thorn Wood", 
+	"Blood Thorn Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		bloodthorn=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=5,
+	},
+	"#5b0606d0", 
+	{
+		{
+			name=minetest.colorize("#5b0606", "\nVisceral"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"ethereal:frost_wood", 
+	"frost wood", 
+	"Frost Wood", 
+	"Frost Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		frost=1,
+		tool=1,
+		qn_cost=2,
+		qn_efficiency=4,
+	},
+	"#6484d1d0", 
+	{
+		{
+			name=minetest.colorize("#6484d1", "\nIcy"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"ethereal:redwood_wood", 
+	"redwood wood", 
+	"Redwood Wood", 
+	"Redwood Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		redwood=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=3,
+	},
+	"#421b03d0", 
+	{
+		{
+			name=minetest.colorize("#421b03", "\nImmense"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
+	}
+)
+
+axiscore.register_tool_material(
+	"ethereal:yellow_wood", 
+	"healing", 
+	"Healing Wood", 
+	"Healing Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		wood=1,
+		healing=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=4,
+	},
+	"#ceff89d0", 
+	{
+		{
+			name=minetest.colorize("#ceff89", "\nBenevolent"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1},
+	{	
+		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
+		armor_groups = {fleshy=12},
+		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
 	}
 )
 
@@ -686,7 +1055,7 @@ for _,head in ipairs(axiscore.pickheads) do
 			for a,n in pairs(attrlist) do
 				attrpt=attrpt..a.." "..n.level
 			end
-			if head=="axiscore:pickHead_stone" and handle=="axiscore:toolHandle_wood" and binding=="axiscore:toolBinding_string" then
+			if head=="axiscore:pickHead_stone" and minetest.get_item_group(handle, "wood") and binding=="axiscore:toolBinding_string" then
 				minetest.register_tool("axiscore:pick_".._..__..___, {
 					description = head_def.displayname.." Pickaxe"..attrpt,
 					inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image..")",
