@@ -7,3 +7,4 @@ moreores
 3d_armor
 hudbars
 mobs
+playereffects

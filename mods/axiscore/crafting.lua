@@ -83,3 +83,63 @@ minetest.register_craft({
 		{'group:sand'},
 	}
 })
+
+minetest.register_craft({
+	output = "dmobs:dragon_gem_fire",
+	type="shapeless",
+	recipe = {"dmobs:dragon_gem", "ethereal:fire_dust"},
+})
+
+minetest.register_craft({
+	output = "dmobs:dragon_gem_poison",
+	type="shapeless",
+	recipe = {"dmobs:dragon_gem", "flowers:mushroom_red"},
+})
+
+minetest.register_craft({
+	output = "dmobs:dragon_gem_ice",
+	type="shapeless",
+	recipe = {"dmobs:dragon_gem", "default:ice"},
+})
+
+minetest.register_craft({
+	output = "dmobs:dragon_gem_lightning",
+	type="shapeless",
+	recipe = {"dmobs:dragon_gem", "default:copperblock"},
+})
+
+minetest.register_craft({
+	output = 'axiscore:spittleblade',
+	recipe = {
+		{'', 'dmobs:dragon_gem_poison', ''},
+		{'', 'dmobs:dragon_gem_poison', ''},
+		{'', 'default:steel_ingot', ''},
+	},
+})
+
+minetest.register_craft({
+	output = 'axiscore:skywhipper',
+	recipe = {
+		{'', 'dmobs:dragon_gem_ice', ''},
+		{'', 'dmobs:dragon_gem_ice', ''},
+		{'', 'default:steel_ingot', ''},
+	},
+})
+
+minetest.register_craft({
+	output = 'axiscore:dragonsbreath',
+	recipe = {
+		{'', 'dmobs:dragon_gem_fire', ''},
+		{'', 'dmobs:dragon_gem_fire', ''},
+		{'', 'default:steel_ingot', ''},
+	},
+})
+
+minetest.register_craft({
+	output = 'axiscore:windhammer',
+	recipe = {
+		{'', 'dmobs:dragon_gem_lightning', ''},
+		{'', 'dmobs:dragon_gem_lightning', ''},
+		{'', 'default:steel_ingot', ''},
+	},
+})
