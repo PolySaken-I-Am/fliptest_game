@@ -3,19 +3,30 @@ axiscore.spellcomponents={}
 
 hb.register_hudbar("axiscore:quintessence", "#ffffff", "Quintessence", {bar="axiscore_quintessence_bar.png", icon="axiscore_quintessence_icon.png", bgicon="axiscore_quintessence_icon_bg.png"}, 0,1000,false,nil)
 
+minetest.register_on_newplayer(function(player)
+	axiscore.set_quintessence(player, 1)
+	axiscore.set_spell(player, "touch;break")
+end)
+
 function axiscore.get_quintessence(player)
 	return tonumber(player:get_attribute("axiscore_quintessence"))
 end
 
 function axiscore.set_quintessence(player, n)
 	player:set_attribute("axiscore_quintessence", n)
-	hb.change_hudbar(player, "axiscore:quintessence", n)
 end
 
-minetest.register_on_newplayer(function(player)
-	axiscore.set_quintessence(player, 1)
-	axiscore.set_active_spell(player, "proj;")
-end)
+minetest.register_chatcommand("set_spell", {
+	params = "<spell>",
+	description = "set a player's personal power network to <amount>",
+	privs = {debug=true},
+	func = function(name, param)
+		local player = minetest.get_player_by_name(name)
+		if player and player:is_player() then
+			player:set_attribute("axiscore_spell", param)
+		end
+	end,
+})
 
 minetest.register_on_joinplayer(function(player)
 	hb.init_hudbar(player, "axiscore:quintessence", axiscore.get_quintessence(player), 1000, false)
@@ -31,58 +42,115 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-function axiscore.set_active_spell(player, spell)
-	player:set_attribute("axiscore_active_spell", spell)
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if axiscore.get_quintessence(player) then
+			hb.change_hudbar(player, "axiscore:quintessence", axiscore.get_quintessence(player))
+		end
+	end
+end)
+
+function axiscore.set_spell(player, spell)
+	player:set_attribute("axiscore_spell", spell)
 end
 
-function axiscore.get_active_spell(player)
-	return player:get_attribute("axiscore_active_spell")
+function axiscore.get_spell(player)
+	return player:get_attribute("axiscore_spell")
 end
 
 
+function axiscore.cast_active_spell(itemstack, player, pointed, stats)
+	local spell = axiscore.get_spell(player)
+	local spell = string.split(spell, ";")
+	local old_val={result="nil"}
+	for _,comp in ipairs(spell) do
+		if axiscore.spellcomponents[comp] then
+			old_val=axiscore.spellcomponents[comp].func(itemstack, player, pointed, stats, old_val)
+		end
+	end
+end
 
-local crl=function(tool, caster, targeted, old_val)
-	if type(old_val)=="table" then
-		if old_val.status=="nil" then
-			local pos = caster:getpos()
-			local dir = caster:get_look_dir()
-			local yaw = caster:get_look_yaw()
-			if pos and dir and yaw then
-				pos.y = pos.y + 1.6
-				local obj = minetest.add_entity(pos, "axiscore:magicproj")
-				if obj then
-					obj:setvelocity({x=dir.x * 45, y=dir.y * 45, z=dir.z * 45})
-					obj:setacceleration({x=dir.x * 0, y=0, z=dir.z * 0})
-					obj:setyaw(yaw + math.pi)
-					local ent = obj:get_luaentity()
-					if ent then
-						ent.player = ent.player or caster
+axiscore.spellcomponents["touch"]={
+	description="Target:Touch",
+	func=function(itemstack, player, pointed, stats, old_val)
+		if old_val then
+			if axiscore.get_quintessence(player) > 9 then
+				if old_val.result=="nil" then
+					if pointed.type == "object" then
+						axiscore.set_quintessence(player, axiscore.get_quintessence(player)-10)
+						return {result="success", target_type="obj", target=pointed.ref}
+					elseif pointed.type=="node" then
+						axiscore.set_quintessence(player, axiscore.get_quintessence(player)-10)
+						return {result="success", target_type="node", target=minetest.get_pointed_thing_position(pointed, false)}
 					end
 				end
 			end
 		end
 	end
+}
+
+function axiscore.get_node_diggable(node)
+	local def = ItemStack(node):get_definition()
+	return def.diggable
 end
 
-local dolist = {}
-
-function axiscore.execute_spell(spell, tool, caster, target)
-	local components = string.split(spell, ";")
-	local prevval = {status="nil"}
-	local do_final=function() print("called spell with no action") end
-	for _,component in ipairs(components) do
-		if axiscore.spellcomponents[component] then
-			prevval = axiscore.spellcomponents[component].func(tool, caster, target, prevval)
-			if component=="proj" then
-				do_final=crl
-			end
-			if axiscore.spellcomponents[component].type=="action" then
-				table.insert(dolist, {f=axiscore.spellcomponents[component].func, {tool=tool, caster=caster, target=target, old_val=prevval}})
+axiscore.spellcomponents["break"]={
+	description="Action:Break",
+	func=function(itemstack, player, pointed, stats, old_val)
+		if old_val then
+			if axiscore.get_quintessence(player) > (99*stats.cost)+stats.cost then
+				if old_val.result=="success" then
+					if old_val.target_type=="node" then
+						if axiscore.get_node_diggable(minetest.get_node(old_val.target).name) then
+							player:get_inventory():add_item("main", minetest.get_node(old_val.target).name)
+							minetest.remove_node(old_val.target)
+							axiscore.set_quintessence(player, axiscore.get_quintessence(player)-100*stats.cost)
+							return {result="success", target_type="node", target=old_val.target}
+						end
+					end
+				end
 			end
 		end
 	end
-	do_final(tool, caster, target)
-end
+}
+
+axiscore.spellcomponents["explode"]={
+	description="Action:Explode",
+	func=function(itemstack, player, pointed, stats, old_val)
+		if old_val then
+			if axiscore.get_quintessence(player) > (299*stats.cost)+stats.cost then
+				if old_val.result=="success" then
+					if old_val.target_type=="node" then
+						tnt.boom(old_val.target, {radius=stats.output, damage_radius=stats.output})
+						axiscore.set_quintessence(player, axiscore.get_quintessence(player)-200*stats.cost)
+						return {result="success", target_type="node", target=old_val.target}
+					end
+				end
+			end
+		end
+	end
+}
+
+axiscore.spellcomponents["cut"]={
+	description="Action:Cut",
+	func=function(itemstack, player, pointed, stats, old_val)
+		if old_val then
+			if axiscore.get_quintessence(player) > (9*stats.cost)+stats.cost then
+				if old_val.result=="success" then
+					if old_val.target_type=="obj" then
+						local damage = stats.output*3
+						old_val.target:punch(player, 1.0, {
+							full_punch_interval = 1.0,
+							damage_groups= {fleshy = damage},
+						})
+						axiscore.set_quintessence(player, axiscore.get_quintessence(player)-10*stats.cost)
+						return {result="success", target_type="obj", target=old_val.target}
+					end
+				end
+			end
+		end
+	end
+}
 
 local function tableHasKey(table,key)
     return table[key] ~= nil
@@ -128,13 +196,13 @@ for _,head in ipairs(axiscore.plates) do
 					attrpt=attrpt..a.." "..n.level
 				end
 				minetest.register_tool("axiscore:staff_".._..__..___, {
-					description = handle_def.displayname.." Staff"..attrpt,
+					description = handle_def.displayname.." Staff"..attrpt.."\nCost: "..handle_def.groups.qn_cost.."\nStrength: "..head_def.groups.qn_output.."\nSpeed: "..handle_def.groups.qn_efficiency,
 					inventory_image = "("..handle_def.inventory_image..")^("..head_def.inventory_image2..")^("..butt_def.inventory_image3..")",
-					groups = {not_in_creative_inventory=1},
 					sound = {breaks = "default_tool_breaks"},
 					attributes=attrlist,
+					groups={qn_output=head_def.groups.qn_output, qn_cost=handle_def.groups.qn_cost, qn_efficiency=handle_def.groups.qn_efficiency, not_in_creative_inventory=1},
 					on_use=function(itemstack, player, pointed)
-						axiscore.execute_spell(axiscore.get_active_spell(player), itemstack, player, pointed)
+						axiscore.cast_active_spell(itemstack, player, pointed, {output=head_def.groups.qn_output, cost=handle_def.groups.qn_cost, efficiency=handle_def.groups.qn_efficiency})
 					end
 				})
 				minetest.register_craft({
@@ -149,97 +217,3 @@ for _,head in ipairs(axiscore.plates) do
 		end
 	end
 end
-
-function axiscore.register_spell_component(name, def)
-	axiscore.spellcomponents[name]=def
-end
-
-
-axiscore.register_spell_component("self", {
-	description="Target:Self",
-	func=function(tool, caster, targeted, old_val)
-		if type(old_val)=="table" then
-			if old_val.status=="nil" then
-				return {status="success", target=caster, target_type="entity"}
-			end
-		end
-	end
-})
-
-axiscore.register_spell_component("touch", {
-	description="Target:Touch",
-	func=function(tool, caster, targeted, old_val)
-		if type(old_val)=="table" then
-			if old_val.status=="nil" then
-				if targeted.type=="node" then
-					return {status="success", target=minetest.get_pointed_thing_position(targeted, true), target_type="worldpos"}
-				elseif targeted.type=="object" then
-					return {status="success", target=targeted.ref, target_type="entity"}
-				end
-			end
-		end
-	end
-})
-
-axiscore.register_spell_component("proj", {
-	description="Target:Projectile",
-	func=function(tool, caster, targeted, old_val)
-		return {status="success"}
-	end
-})
-
-local proj = {
-	physical = false,
-	timer = 0,
-	visual = "sprite",
-	visual_size = {x=0.6, y=0.6},
-	textures = {"axiscore_quintessence_spark.png"},
-	lastpos= {},
-	collisionbox = {0, 0, 0, 0, 0, 0},
-}
-proj.on_step = function(self, dtime)
-	self.timer = self.timer + dtime
-	local pos = self.object:getpos()
-	local node = minetest.get_node(pos)
-
-	if self.timer > 0.065 then
-		local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1.5)
-		for k, obj in pairs(objs) do
-			if obj:get_luaentity() ~= nil then
-				if obj:get_luaentity().name ~= "axiscore:magicproj" and obj:get_luaentity().name ~= "__builtin:item" then
-					self.target=obj
-					self.object:remove()
-					for _,f in ipairs(dolist) do
-						f.f(f.tool, f.caster, f.target, f.old_val)
-					end
-				end
-			else
-				self.target=pos
-				self.object:remove()
-				for _,f in ipairs(dolist) do
-					 f.f(f.tool, f.caster, f.target, f.old_val)
-				end
-			end
-		end
-	end
-
-	if self.lastpos.x ~= nil then
-		if minetest.registered_nodes[node.name].walkable then
-			self.object:remove()
-		end
-	end
-	self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
-	minetest.add_particle({
-		pos = pos,
-		velocity = {x=0, y=0, z=0},
-		acceleration = {x=0, y=0, z=0},
-		expirationtime = 1,
-		size = 1,
-		glow=14,
-		collisiondetection = false,
-		vertical = false,
-		texture = "axiscore_quintessence_spark.png",
-	})
-end
-
-minetest.register_entity("axiscore:magicproj", proj )

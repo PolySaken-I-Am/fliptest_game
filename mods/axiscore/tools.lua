@@ -279,7 +279,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"default:wood", 
 	"apple_wood", 
-	"Apple Wood", 
+	"Apple", 
 	"Apple Wood", 
 	1, 
 	2, 
@@ -314,7 +314,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"default:acacia_wood", 
 	"acacia_wood", 
-	"Acacia Wood", 
+	"Acacia", 
 	"Acacia Wood", 
 	1, 
 	2, 
@@ -349,7 +349,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"default:pine_wood", 
 	"pine_wood", 
-	"Pine Wood", 
+	"Pine", 
 	"Pine Wood", 
 	1, 
 	2, 
@@ -384,7 +384,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"default:jungle_wood", 
 	"jungle_wood", 
-	"Jungle Wood", 
+	"Jungle", 
 	"Jungle Wood", 
 	1, 
 	2, 
@@ -419,7 +419,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"default:aspen_wood", 
 	"aspen_wood", 
-	"Aspen Wood", 
+	"Aspen", 
 	"Aspen Wood", 
 	1, 
 	2, 
@@ -454,7 +454,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"dfcaverns:black_cap_wood", 
 	"blackcap_wood", 
-	"Black Cap Wood", 
+	"Black Cap", 
 	"Black Cap Wood", 
 	1, 
 	2, 
@@ -489,7 +489,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"dfcaverns:blood_thorn_wood", 
 	"bloodthorn_wood", 
-	"Blood Thorn Wood", 
+	"Blood Thorn", 
 	"Blood Thorn Wood", 
 	1, 
 	2, 
@@ -526,7 +526,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"ethereal:frost_wood", 
 	"frost_wood", 
-	"Frost Wood", 
+	"Frostwood", 
 	"Frost Wood", 
 	1, 
 	2, 
@@ -561,7 +561,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"ethereal:redwood_wood", 
 	"redwood_wood", 
-	"Redwood Wood", 
+	"Redwood", 
 	"Redwood Wood", 
 	1, 
 	2, 
@@ -596,7 +596,7 @@ axiscore.register_tool_material(
 axiscore.register_tool_material(
 	"ethereal:yellow_wood", 
 	"healing_wood", 
-	"Healing Wood", 
+	"Healing", 
 	"Healing Wood", 
 	1, 
 	2, 

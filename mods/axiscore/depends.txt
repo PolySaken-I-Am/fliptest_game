@@ -8,3 +8,4 @@ moreores
 hudbars
 mobs
 playereffects
+tnt
