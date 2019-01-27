@@ -52,3 +52,13 @@ minetest.register_craftitem("axiscore:iron_mix", {
 	description = "Steel Base",
 	inventory_image = "axiscore_iron_mix.png",
 })
+
+minetest.register_craftitem("axiscore:book_index", {
+	description = minetest.colorize("#5fff00", "The Back Cover of a Book"),
+	inventory_image = "axiscore_book_index.png",
+})
+
+minetest.register_craftitem("axiscore:blank_projectile_index", {
+	description = minetest.colorize("#5fff00", "Blank Projectile Index"),
+	inventory_image = "axiscore_projectile_index.png",
+})

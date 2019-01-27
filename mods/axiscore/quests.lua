@@ -23,14 +23,18 @@ quests.register_quest("fliptest:q1",{
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
-	if minetest.get_item_group(node.name, "quest_pebble") then
-		quests.update_quest(digger:get_player_name(), "fliptest:q1", 1)
+	if digger then
+		if minetest.get_item_group(node.name, "quest_pebble") then
+			quests.update_quest(digger:get_player_name(), "fliptest:q1", 1)
+		end
 	end
 end)
 
 minetest.register_on_placenode(function(pos, node, digger)
-	if minetest.get_item_group(node.name, "quest_pebble") then
-		quests.update_quest(digger:get_player_name(), "fliptest:q1", -1)
+	if digger then
+		if minetest.get_item_group(node.name, "quest_pebble") then
+			quests.update_quest(digger:get_player_name(), "fliptest:q1", -1)
+		end
 	end
 end)
 
@@ -46,8 +50,10 @@ quests.register_quest("fliptest:q2",{
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
-	if node.name=="bushes:youngtree2_bottom" then
-		quests.update_quest(digger:get_player_name(), "fliptest:q2", 1)
+	if digger then
+		if node.name=="bushes:youngtree2_bottom" then
+			quests.update_quest(digger:get_player_name(), "fliptest:q2", 1)
+		end
 	end
 end)
 
@@ -86,8 +92,10 @@ quests.register_quest("fliptest:q4",{
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
-	if minetest.get_item_group(node.name, "tree") then
-		quests.update_quest(digger:get_player_name(), "fliptest:q4", 1)
+	if digger then
+		if minetest.get_item_group(node.name, "tree") then
+			quests.update_quest(digger:get_player_name(), "fliptest:q4", 1)
+		end
 	end
 end)
 
@@ -281,8 +289,10 @@ quests.register_quest("fliptest:q15",{
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
-	if node.name=="default:stone_with_coal" then
-		quests.update_quest(digger:get_player_name(), "fliptest:q15", 1)
+	if digger then
+		if node.name=="default:stone_with_coal" then
+			quests.update_quest(digger:get_player_name(), "fliptest:q15", 1)
+		end
 	end
 end)
 
@@ -298,8 +308,10 @@ quests.register_quest("fliptest:q16",{
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
-	if node.name=="default:stone_with_iron" then
-		quests.update_quest(digger:get_player_name(), "fliptest:q16", 1)
+	if digger then
+		if node.name=="default:stone_with_iron" then
+			quests.update_quest(digger:get_player_name(), "fliptest:q16", 1)
+		end
 	end
 end)
 
@@ -353,7 +365,9 @@ quests.register_quest("fliptest:mithril",{
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
-	if node.name=="moreores:mineral_mithril" then
-		quests.update_quest(digger:get_player_name(), "fliptest:mithril", 1)
+	if digger then
+		if node.name=="moreores:mineral_mithril" then
+			quests.update_quest(digger:get_player_name(), "fliptest:mithril", 1)
+		end
 	end
 end)

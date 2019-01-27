@@ -143,3 +143,19 @@ minetest.register_craft({
 		{'', 'default:steel_ingot', ''},
 	},
 })
+
+minetest.register_craft({
+	output = 'axiscore:book_index',
+	recipe = {
+		{'', 'axiscore:craft_knife', ''},
+		{'', 'default:book', ''},
+		{'', '', ''},
+	},
+	replacements = {{"axiscore:craft_knife","axiscore:craft_knife"}}
+})
+
+minetest.register_craft({
+	output = "axiscore:blank_projectile_index",
+	type="shapeless",
+	recipe = {"axiscore:book_index", "default:torch", "default:diamond", "default:glass"},
+})

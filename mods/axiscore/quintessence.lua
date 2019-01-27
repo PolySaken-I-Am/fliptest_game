@@ -89,6 +89,20 @@ axiscore.spellcomponents["touch"]={
 	end
 }
 
+axiscore.spellcomponents["self"]={
+	description="Target:self",
+	func=function(itemstack, player, pointed, stats, old_val)
+		if old_val then
+			if axiscore.get_quintessence(player) > 9 then
+				if old_val.result=="nil" then
+					return {result="success", target_type="obj", target=player}
+				end
+			end
+		end
+	end
+}
+
+
 function axiscore.get_node_diggable(node)
 	local def = ItemStack(node):get_definition()
 	return def.diggable
@@ -139,6 +153,27 @@ axiscore.spellcomponents["cut"]={
 				if old_val.result=="success" then
 					if old_val.target_type=="obj" then
 						local damage = stats.output*3
+						old_val.target:punch(player, 1.0, {
+							full_punch_interval = 1.0,
+							damage_groups= {fleshy = damage},
+						})
+						axiscore.set_quintessence(player, axiscore.get_quintessence(player)-10*stats.cost)
+						return {result="success", target_type="obj", target=old_val.target}
+					end
+				end
+			end
+		end
+	end
+}
+
+axiscore.spellcomponents["salve"]={
+	description="Action:Heal",
+	func=function(itemstack, player, pointed, stats, old_val)
+		if old_val then
+			if axiscore.get_quintessence(player) > (9*stats.cost)+stats.cost then
+				if old_val.result=="success" then
+					if old_val.target_type=="obj" then
+						local damage = stats.output*-3
 						old_val.target:punch(player, 1.0, {
 							full_punch_interval = 1.0,
 							damage_groups= {fleshy = damage},
@@ -211,6 +246,25 @@ for _,head in ipairs(axiscore.plates) do
 						{'', head, ''},
 						{'', handle, ''},
 						{'', butt, ''},
+					},
+				})
+				minetest.register_tool("axiscore:staff2_".._..__..___, {
+					description = handle_def.displayname.." Projection Staff"..attrpt.."\nCost: "..handle_def.groups.qn_cost.."\nStrength: "..head_def.groups.qn_output.."\nSpeed: "..handle_def.groups.qn_efficiency,
+					inventory_image = "("..handle_def.inventory_image..")^(".."axiscore_projhead.png"..")^("..butt_def.inventory_image3..")",
+					sound = {breaks = "default_tool_breaks"},
+					attributes=attrlist,
+					groups={qn_output=head_def.groups.qn_output, qn_cost=handle_def.groups.qn_cost, qn_efficiency=handle_def.groups.qn_efficiency, not_in_creative_inventory=1},
+					stats={output=head_def.groups.qn_output, cost=handle_def.groups.qn_cost, efficiency=handle_def.groups.qn_efficiency},
+					on_use=function(itemstack, player, pointed)
+						axiscore.cast_active_spell(itemstack, player, pointed, {output=head_def.groups.qn_output, cost=handle_def.groups.qn_cost, efficiency=handle_def.groups.qn_efficiency})
+					end
+				})
+				minetest.register_craft({
+					output = "axiscore:staff2_".._..__..___,
+					recipe = {
+						{'', "axiscore:blank_projectile_index", ''},
+						{'', "axiscore:staff_".._..__..___, ''},
+						{'', '', ''},
 					},
 				})
 			end
