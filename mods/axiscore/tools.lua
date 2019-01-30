@@ -42,6 +42,7 @@ axiscore.plates = {}
 minetest.register_craftitem("axiscore:toolBinding_string", {
 	description = "String Tool Binding",
 	inventory_image = "axiscore_toolbinding.png^[colorize:#165b0bdf",
+	inventory_image2 = "axiscore_bowstring.png^[colorize:#165b0bdf",
 	groups = {tool=1},
 	snappy = {uses=6, maxlevel=1},
 	cracky = {uses=6, maxlevel=1},
@@ -72,6 +73,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 		minetest.register_craftitem("axiscore:toolHandle_"..name, {
 			description = displayname.." Tool Handle\n"..displayname2,
 			inventory_image = "axiscore_toolhandle.png^[colorize:"..colorize,
+			inventory_image2 = "axiscore_bowlimbs.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -96,6 +98,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 		minetest.register_craftitem("axiscore:toolBinding_"..name, {
 			description = displayname.." Tool Binding\n"..displayname2,
 			inventory_image = "axiscore_toolbinding.png^[colorize:"..colorize,
+			inventory_image2 = "axiscore_bowstring.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -122,6 +125,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			inventory_image = "axiscore_plate.png^[colorize:"..colorize,
 			inventory_image2 = "axiscore_cap.png^[colorize:"..colorize,
 			inventory_image3 = "axiscore_butt.png^[colorize:"..colorize,
+			inventory_image4 = "axiscore_bowgrip.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -1835,3 +1839,183 @@ proj.on_step = function(self, dtime)
 end
 
 minetest.register_entity("axiscore:storm", proj )
+
+local function set_draw(player, n)
+	player:set_attribute("axiscore_draw", n)
+end
+
+local function get_draw(player)
+	return tonumber(player:get_attribute("axiscore_draw"))
+end
+
+local function startDraw(item, player)
+	set_draw(player, 1)
+end
+
+local function fire(player)
+	local pos = player:getpos()
+	local dir = player:get_look_dir()
+	local yaw = player:get_look_yaw()
+	if pos and dir and yaw then
+		pos.y = pos.y + 1.6
+		local obj = minetest.add_entity(pos, "axiscore:arrow")
+		if obj then
+			obj:setvelocity({x=dir.x * 45, y=dir.y * 45, z=dir.z * 45})
+			obj:setacceleration({x=dir.x * 0, y=0, z=dir.z * 0})
+			obj:setyaw(yaw + math.pi)
+			local ent = obj:get_luaentity()
+			if ent then
+				ent.player = ent.player or player
+			end
+		end
+	end
+end
+
+local proj = {
+	physical = false,
+	timer = 0,
+	visual = "wielditem",
+	visual_size = {x=0.3, y=0.3},
+	textures = {"axiscore_arrow.png"},
+	lastpos= {},
+	collisionbox = {0.1, 0.1, 0.1, 0.1, 0.1, 0.1},
+}
+proj.on_step = function(self, dtime)
+	self.timer = self.timer + dtime
+	local pos = self.object:getpos()
+	local node = minetest.get_node(pos)
+
+	if self.timer > 0.065 then
+		local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1.5)
+		for k, obj in pairs(objs) do
+			if obj:get_luaentity() ~= nil then
+				if obj:get_luaentity().name ~= "axiscore:arrow" and obj:get_luaentity().name ~= "__builtin:item" then
+					local damage = 10
+					obj:punch(self.object, 1.0, {
+						full_punch_interval = 1.0,
+						damage_groups= {fleshy = damage},
+					}, nil)
+					self.object:remove()
+				end
+			else
+				local damage = 10
+				obj:punch(self.object, 1.0, {
+					full_punch_interval = 1.0,
+					damage_groups= {fleshy = damage},
+				}, nil)
+				self.object:remove()
+			end
+		end
+	end
+
+	if self.lastpos.x ~= nil then
+		if minetest.registered_nodes[node.name].walkable then
+			self.object:remove()
+		end
+	end
+	self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
+	minetest.add_particle({
+		pos = pos,
+		velocity = {x=0, y=0, z=0},
+		acceleration = {x=0, y=0, z=0},
+		expirationtime = 1,
+		size = 0.3,
+		collisiondetection = false,
+		vertical = false,
+		texture = "axiscore_trail.png",
+	})
+end
+
+minetest.register_entity("axiscore:arrow", proj )
+
+
+
+minetest.register_on_newplayer(function(player)
+	set_draw(player, 0)
+end)
+
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if get_draw(player) then
+			if string.split(player:get_wielded_item():get_name(), "_")[1]=="axiscore:bow" then
+				if get_draw(player) > 0 then
+					if player:get_player_control().LMB then
+						if get_draw(player) < 50 then
+							set_draw(player, get_draw(player)+1)
+						else
+							fire(player)
+							set_draw(player, 0)
+						end
+					end
+				end
+			end
+		else
+			set_draw(player, 0)
+		end
+	end
+end)
+
+for _,head in ipairs(axiscore.plates) do
+	for __,binding in ipairs(axiscore.bindings) do
+		for ___,handle in ipairs(axiscore.handles) do
+			local head_def = ItemStack(head):get_definition()
+			local binding_def = ItemStack(binding):get_definition()
+			local handle_def = ItemStack(handle):get_definition()
+			local attrlist = {}
+			for _,attr in ipairs(head_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(binding_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(handle_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			local attrpt=""
+			for a,n in pairs(attrlist) do
+				attrpt=attrpt..a.." "..n.level
+			end
+			minetest.register_tool("axiscore:bow_".._..__..___, {
+				description = handle_def.displayname.." Bow"..attrpt,
+				inventory_image = "("..handle_def.inventory_image2..")^("..head_def.inventory_image4..")^("..binding_def.inventory_image2..")",
+				groups = {not_in_creative_inventory=1},
+				sound = {breaks = "default_tool_breaks"},
+				attributes=attrlist,
+				on_use=function(itemstack, player, pointed)
+					startDraw(itemstack, player)
+				end
+			})
+			minetest.register_craft({
+				output = "axiscore:bow_".._..__..___,
+				recipe = {
+					{'', handle, binding},
+					{head, '', binding},
+					{'', handle, binding},
+				},
+			})
+			minetest.register_craft({
+				output = "axiscore:bow_".._..__..___,
+				type="shapeless",
+				recipe = {"axiscore:bow_".._..__..___, head_def.material,},
+			})
+		end
+	end
+end

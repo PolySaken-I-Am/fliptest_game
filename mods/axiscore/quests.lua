@@ -343,7 +343,8 @@ quests.register_quest("fliptest:q18",{
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Congratulations! You are no longer in the tutorial."))
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","It is recommended to disable the quest GUI at this time."))
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Most quests from here on will come with rewards."))
-		quests.start_quest(playername, "fliptest:mithril")
+		quests.start_quest(playername, "fliptest:armory1")
+		quests.start_quest(playername, "fliptest:magic1")
 	end,
 })
 
@@ -354,7 +355,7 @@ minetest.register_on_craft(function(itemstack, player)
 	end
 end)
 
-quests.register_quest("fliptest:mithril",{
+quests.register_quest("fliptest:armory1",{
 	title=minetest.colorize("#00ffff","Mithril Myth"),
 	description="obtain mithril",
 	max=1,
@@ -367,7 +368,25 @@ quests.register_quest("fliptest:mithril",{
 minetest.register_on_dignode(function(pos, node, digger)
 	if digger then
 		if node.name=="moreores:mineral_mithril" then
-			quests.update_quest(digger:get_player_name(), "fliptest:mithril", 1)
+			quests.update_quest(digger:get_player_name(), "fliptest:armory1", 1)
+		end
+	end
+end)
+
+quests.register_quest("fliptest:magic1",{
+	title=minetest.colorize("#00ffff","Golden Globe"),
+	description="obtain 10 gold",
+	max=1,
+	autoaccept=true,
+	callback=function(playername, quest)
+		
+	end,
+})
+
+minetest.register_on_dignode(function(pos, node, digger)
+	if digger then
+		if node.name=="moreores:mineral_mithril" then
+			quests.update_quest(digger:get_player_name(), "fliptest:magic1", 1)
 		end
 	end
 end)
