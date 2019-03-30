@@ -386,7 +386,7 @@ minetest.register_craftitem("axiscore:spellbook", {
 	on_secondary_use=function(itemstack,user)
 		if itemstack:get_meta():get_string("spell") then
 			axiscore.set_spell(user, itemstack:get_meta():get_string("spell"))
-			minetest.chat_send_player(player:get_player_name(), "You are now using the spell "..itemstack:get_meta():get_string("spell"))
+			minetest.chat_send_player(user:get_player_name(), "You are now using the spell "..itemstack:get_meta():get_string("spell"))
 		end
 	end
 })
@@ -406,7 +406,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			minetest.chat_send_player(player:get_player_name(), "The spell "..sstring.." has been bound to this spellbook.")
 			local witem = player:get_wielded_item()
 			witem:get_meta():set_string("spell", sstring)
-			witem:get_meta():set_string("description", player:get_player_name().."'s Bound".."Spellbook\n".."Spell: "..sstring)
+			witem:get_meta():set_string("description", player:get_player_name().."'s Bound Spellbook\n".."Spell: "..sstring)
 			player:set_wielded_item(witem)
 		end
 	end
