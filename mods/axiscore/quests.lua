@@ -344,7 +344,11 @@ quests.register_quest("fliptest:q18",{
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","It is recommended to disable the quest GUI at this time."))
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Most quests from here on will come with rewards."))
 		quests.start_quest(playername, "fliptest:armory1")
+		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Find Mithril."))
 		quests.start_quest(playername, "fliptest:magic1")
+		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Find and smelt 10 Gold"))
+		quests.start_quest(playername, "fliptest:spirit1")
+		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Craft A Backwards Book"))
 	end,
 })
 
@@ -361,7 +365,7 @@ quests.register_quest("fliptest:armory1",{
 	max=1,
 	autoaccept=true,
 	callback=function(playername, quest)
-		
+		quests.start_quest(playername, "fliptest:armory2")
 	end,
 })
 
@@ -383,10 +387,29 @@ quests.register_quest("fliptest:magic1",{
 	end,
 })
 
-minetest.register_on_dignode(function(pos, node, digger)
-	if digger then
-		if node.name=="moreores:mineral_mithril" then
-			quests.update_quest(digger:get_player_name(), "fliptest:magic1", 1)
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_inventory():contains_item("main", "default:gold_ingot 10") then
+			quests.update_quest(player:get_player_name(), "fliptest:magic1", 1)
+		end
+	end
+end)
+
+
+quests.register_quest("fliptest:spirit1",{
+	title=minetest.colorize("#00ffff","The Inverse Index"),
+	description="craft a backwards book",
+	max=1,
+	autoaccept=true,
+	callback=function(playername, quest)
+		
+	end,
+})
+
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_inventory():contains_item("main", "axiscore:book_reverse") then
+			quests.update_quest(player:get_player_name(), "fliptest:spirit1", 1)
 		end
 	end
 end)

@@ -159,3 +159,31 @@ minetest.register_craft({
 	type="shapeless",
 	recipe = {"axiscore:book_index", "default:torch", "default:diamond", "default:glass"},
 })
+
+minetest.register_craft({
+	output = 'axiscore:book_cover',
+	recipe = {
+		{'', '', ''},
+		{'', 'default:book', ''},
+		{'', 'axiscore:craft_knife', ''},
+	},
+	replacements = {{"axiscore:craft_knife","axiscore:craft_knife"}}
+})
+
+minetest.register_craft({
+	output = 'axiscore:book_reverse',
+	recipe = {
+		{'', 'default:paper', ''},
+		{'axiscore:book_index', 'default:paper', 'axiscore:book_cover'},
+		{'', 'default:paper', ''},
+	},
+})
+
+minetest.register_craft({
+	output = 'axiscore:spellbook',
+	recipe = {
+		{'', 'ethereal:illumishroom2', ''},
+		{'default:obsidian_shard', 'axiscore:book_reverse', 'default:gold_ingot'},
+		{'', '', ''},
+	},
+})
