@@ -170,7 +170,7 @@ quests.register_quest("fliptest:q8",{
 })
 
 minetest.register_on_craft(function(itemstack, player)
-	if itemstack:get_name()=="axiscore:toolHandle_wood"	then
+	if itemstack:get_name()=="axiscore:toolHandle_apple_wood"	then
 		quests.update_quest(player:get_player_name(), "fliptest:q8", 1)
 	end
 end)
@@ -221,7 +221,7 @@ quests.register_quest("fliptest:q11",{
 })
 
 minetest.register_on_craft(function(itemstack, player)
-	if itemstack:get_name()=="axiscore:pick_111"	then
+	if itemstack:get_name()=="axiscore:pick_112"	then
 		quests.update_quest(player:get_player_name(), "fliptest:q11", 1)
 	end
 end)
@@ -318,7 +318,7 @@ end)
 quests.register_quest("fliptest:q17",{
 	title=minetest.colorize("#00ffff","Perfect Process"),
 	description="Smelt 3 steel",
-	max=3,
+	max=1,
 	autoaccept=true,
 	callback=function(playername, quest)
 		quests.start_quest(playername, "fliptest:q18")
