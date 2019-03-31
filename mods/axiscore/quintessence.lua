@@ -189,7 +189,7 @@ axiscore.spellcomponents["proj"]={
 	end
 }
 
-axiscore.spellrecipes["mobs:cobweb"]="proj"
+axiscore.spellrecipes["axiscore:arrow"]="proj"
 
 function axiscore.get_node_diggable(node)
 	local def = ItemStack(node):get_definition()
@@ -388,25 +388,33 @@ minetest.register_craftitem("axiscore:spellbook", {
 			axiscore.set_spell(user, itemstack:get_meta():get_string("spell"))
 			minetest.chat_send_player(user:get_player_name(), "You are now using the spell "..itemstack:get_meta():get_string("spell"))
 		end
-	end
+	end,
+	on_place=function(itemstack,user)
+		if itemstack:get_meta():get_string("spell") then
+			axiscore.set_spell(user, itemstack:get_meta():get_string("spell"))
+			minetest.chat_send_player(user:get_player_name(), "You are now using the spell "..itemstack:get_meta():get_string("spell"))
+		end
+	end,
 })
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local inv=player:get_inventory()
 	local sstring=""
+	local sstring2=""
 	if formname=="spellbook" then
 		if fields.craft then
 			for _,i in ipairs(inv:get_list("spellsetup")) do
 				if axiscore.spellrecipes[i:get_name()] then
 					inv:set_stack("spellsetup", _, "")
 					sstring=sstring..axiscore.spellrecipes[i:get_name()]..";"
+					sstring2=sstring2..axiscore.spellcomponents[axiscore.spellrecipes[i:get_name()]].description.." => "
 				end
 			end
 			axiscore.set_spell(player, sstring)
-			minetest.chat_send_player(player:get_player_name(), "The spell "..sstring.." has been bound to this spellbook.")
+			minetest.chat_send_player(player:get_player_name(), "The spell "..sstring2.." has been bound to this spellbook.")
 			local witem = player:get_wielded_item()
 			witem:get_meta():set_string("spell", sstring)
-			witem:get_meta():set_string("description", player:get_player_name().."'s Bound Spellbook\n".."Spell: "..sstring)
+			witem:get_meta():set_string("description", player:get_player_name().."'s Bound Spellbook\n".."Spell: "..sstring2)
 			player:set_wielded_item(witem)
 		end
 	end

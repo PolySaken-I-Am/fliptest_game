@@ -196,3 +196,9 @@ minetest.register_craft({
 		{'', 'mobs:chicken_feather', ''},
 	},
 })
+
+minetest.register_craft({
+	output = "default:flint",
+	type="shapeless",
+	recipe = {"default:gravel"},
+})

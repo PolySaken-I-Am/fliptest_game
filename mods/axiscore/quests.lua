@@ -239,7 +239,9 @@ quests.register_quest("fliptest:q12",{
 
 minetest.register_on_dignode(function(pos, node, digger)
 	if minetest.get_item_group(node.name, "stone") then
-		quests.update_quest(digger:get_player_name(), "fliptest:q12", 1)
+		if digger then
+			quests.update_quest(digger:get_player_name(), "fliptest:q12", 1)
+		end
 	end
 end)
 

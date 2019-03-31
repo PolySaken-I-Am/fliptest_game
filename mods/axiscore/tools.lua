@@ -74,6 +74,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			description = displayname.." Tool Handle\n"..displayname2,
 			inventory_image = "axiscore_toolhandle.png^[colorize:"..colorize,
 			inventory_image2 = "axiscore_bowlimbs.png^[colorize:"..colorize,
+			inventory_image3 = "axiscore_crossbow.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -99,6 +100,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			description = displayname.." Tool Binding\n"..displayname2,
 			inventory_image = "axiscore_toolbinding.png^[colorize:"..colorize,
 			inventory_image2 = "axiscore_bowstring.png^[colorize:"..colorize,
+			inventory_image3 = "axiscore_bowstring_2.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -127,6 +129,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			inventory_image3 = "axiscore_butt.png^[colorize:"..colorize,
 			inventory_image4 = "axiscore_bowgrip.png^[colorize:"..colorize,
 			inventory_image5 = "axiscore_greatsword.png^[colorize:"..colorize,
+			inventory_image6 = "axiscore_clasp.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -1088,7 +1091,7 @@ for _,head in ipairs(axiscore.pickheads) do
 						damage_groups = {fleshy=2},
 					},
 					sound = {breaks = "default_tool_breaks"},
-					attributes=attrlist,
+					attributes=head_def.attributes,
 				})
 			else
 				minetest.register_tool("axiscore:pick_".._..__..___, {
@@ -1104,7 +1107,7 @@ for _,head in ipairs(axiscore.pickheads) do
 					},
 					groups = {not_in_creative_inventory=1},
 					sound = {breaks = "default_tool_breaks"},
-					attributes=attrlist,
+					attributes=head_def.attributes,
 				})
 			end
 			minetest.register_craft({
@@ -1125,12 +1128,15 @@ for _,head in ipairs(axiscore.pickheads) do
 end
 
 minetest.register_on_dignode(function(pos, node, digger)
-	local stack = digger:get_wielded_item()
-	if string.split(stack:get_name(), "_")[1]=="axiscore:pick" then
-		for _,attr in ipairs(stack:get_definition().attributes) do
-			if attr.type=="pick" or attr.type=="all" then
-				for i=1,attr.level do
-					attr.func(pos, node, digger)
+	if digger then
+		local stack = digger:get_wielded_item()
+		if string.split(stack:get_name(), "_")[1]=="axiscore:pick" then
+			for _,attr in ipairs(stack:get_definition().attributes) do
+				if attr.type=="pick" or attr.type=="all" then
+					for i=1,attr.level do
+						minetest.chat_send_all("attr")
+						attr.func(pos, node, digger)
+					end
 				end
 			end
 		end
@@ -1190,7 +1196,7 @@ for _,head in ipairs(axiscore.axeheads) do
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
-				attributes=attrlist,
+				attributes=head_def.attributes,
 			})
 			minetest.register_craft({
 				output = "axiscore:axe_".._..__..___,
@@ -1210,12 +1216,14 @@ for _,head in ipairs(axiscore.axeheads) do
 end
 
 minetest.register_on_dignode(function(pos, node, digger)
-	local stack = digger:get_wielded_item()
-	if string.split(stack:get_name(), "_")[1]=="axiscore:axe" then
-		for _,attr in ipairs(stack:get_definition().attributes) do
-			if attr.type=="axe" or attr.type=="all" then
-				for i=1,attr.level do
-					attr.func(pos, node, digger)
+	if digger then
+		local stack = digger:get_wielded_item()
+		if string.split(stack:get_name(), "_")[1]=="axiscore:axe" then
+			for _,attr in ipairs(stack:get_definition().attributes) do
+				if attr.type=="axe" or attr.type=="all" then
+					for i=1,attr.level do
+						attr.func(pos, node, digger)
+					end
 				end
 			end
 		end
@@ -1274,7 +1282,7 @@ for _,head in ipairs(axiscore.shovelheads) do
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
-				attributes=attrlist,
+				attributes=head_def.attributes,
 			})
 			minetest.register_craft({
 				output = "axiscore:shovel_".._..__..___,
@@ -1294,12 +1302,14 @@ for _,head in ipairs(axiscore.shovelheads) do
 end
 
 minetest.register_on_dignode(function(pos, node, digger)
-	local stack = digger:get_wielded_item()
-	if string.split(stack:get_name(), "_")[1]=="axiscore:shovel" then
-		for _,attr in ipairs(stack:get_definition().attributes) do
-			if attr.type=="shovel" or attr.type=="all" then
-				for i=1,attr.level do
-					attr.func(pos, node, digger)
+	if digger then
+		local stack = digger:get_wielded_item()
+		if string.split(stack:get_name(), "_")[1]=="axiscore:shovel" then
+			for _,attr in ipairs(stack:get_definition().attributes) do
+				if attr.type=="shovel" or attr.type=="all" then
+					for i=1,attr.level do
+						attr.func(pos, node, digger)
+					end
 				end
 			end
 		end
@@ -1357,7 +1367,7 @@ for _,head in ipairs(axiscore.swordblades) do
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
-				attributes=attrlist,
+				attributes=head_def.attributes,
 			})
 			minetest.register_craft({
 				output = "axiscore:sword_".._..__..___,
@@ -1416,7 +1426,7 @@ for _,head in ipairs(axiscore.plates) do
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
-				attributes=attrlist,
+				attributes=head_def.attributes,
 			})
 			minetest.register_craft({
 				output = "axiscore:greatsword_".._..___,
@@ -1485,7 +1495,7 @@ for _,head in ipairs(axiscore.axeheads) do
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
-				attributes=attrlist,
+				attributes=head_def.attributes,
 			})
 			minetest.register_craft({
 				output = "axiscore:battleaxe_".._..__..___,
