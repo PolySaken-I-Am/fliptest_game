@@ -629,6 +629,7 @@ axiscore.register_tool_material(
 			name=minetest.colorize("#ceff89", "\nBenevolent"),
 			type="nil",
 			func=function(pos, node, digger)
+				digger:set_hp(digger:get_hp()+1)
 			end,
 		}
 	}, 
@@ -762,9 +763,13 @@ axiscore.register_tool_material(
 	"#59dbf2d0", 
 	{
 		{
-			name=minetest.colorize("#59dbf2", "\nRefractive"),
-			type="nil",
+			name=minetest.colorize("#59dbf2", "\nDelicate"),
+			type="all",
 			func=function(pos, node, digger)
+				minetest.after(0.1, function()
+					digger:get_inventory():remove_item("main", minetest.registered_nodes[node.name].drop)
+					digger:get_inventory():add_item("main", node.name)
+				end)
 			end,
 		}
 	}, 
@@ -986,8 +991,33 @@ axiscore.register_tool_material(
 	{
 		{
 			name=minetest.colorize("#ff0000", "\nHellfire"),
-			type="nil",
+			type="all",
 			func=function(pos, node, digger)
+				minetest.after(0.1, function()
+					if minetest.registered_nodes[node.name].drop then
+						local cooked = minetest.get_craft_result({
+							method = "cooking",
+							width = 1,
+							items = {minetest.registered_nodes[node.name].drop}
+						})
+						if cooked and cooked.item ~= nil and cooked.item ~= "" then
+							digger:get_inventory():remove_item("main", minetest.registered_nodes[node.name].drop)
+							digger:get_inventory():add_item("main", minetest.get_craft_result({method = "cooking", width = 1, items = {minetest.registered_nodes[node.name].drop}}).item)
+							
+						end
+					else
+						local cooked = minetest.get_craft_result({
+							method = "cooking",
+							width = 1,
+							items = {node.name}
+						})
+						if cooked and cooked.item ~= nil and cooked.item ~= "" then
+							digger:get_inventory():remove_item("main", node.name)
+							digger:get_inventory():add_item("main", minetest.get_craft_result({method = "cooking", width = 1, items = {node.name}}).item)
+							
+						end
+					end
+				end)
 			end,
 		}
 	}, 
@@ -999,42 +1029,6 @@ axiscore.register_tool_material(
 		damage_groups = {cracky=2, snappy=1, level=3},
 	}
 )
-
-axiscore.register_tool_material(
-	"mobs:lava_orb", 
-	"lava", 
-	"Magmatic", 
-	"Lava", 
-	0.5, 
-	15, 
-	{times={[1]=0.80, [2]=0.20, [3]=0.10}, uses=40, maxlevel=3}, -- snappy
-	{times={[1]=1.80, [2]=0.80, [3]=0.40}, uses=40, maxlevel=3}, -- choppy
-	{times={[1]=1.80, [2]=0.80, [3]=0.40}, uses=40, maxlevel=3}, -- cracky 
-	{times={[1]=1.40, [2]=0.40, [3]=0.20}, uses=40, maxlevel=3}, -- crumbly
-	{	
-		lava=1,
-		tool=1,
-		qn_output=1,
-	},
-	"#ff7f00ef", 
-	{
-		{
-			name=minetest.colorize("#ff0000", "\nHellfire"),
-			type="nil",
-			func=function(pos, node, digger)
-			end,
-		}
-	}, 
-	{binding=1,
-	 handle=1},
-	{
-		groups = {armor_heal=20, armor_use=50, not_in_creative_inventory=1}, 
-		armor_groups = {fleshy=30},
-		damage_groups = {cracky=2, snappy=1, level=3},
-	}
-)
-
-
 
 local function tableHasKey(table,key)
     return table[key] ~= nil
@@ -1133,10 +1127,7 @@ minetest.register_on_dignode(function(pos, node, digger)
 		if string.split(stack:get_name(), "_")[1]=="axiscore:pick" then
 			for _,attr in ipairs(stack:get_definition().attributes) do
 				if attr.type=="pick" or attr.type=="all" then
-					for i=1,attr.level do
-						minetest.chat_send_all("attr")
-						attr.func(pos, node, digger)
-					end
+					attr.func(pos, node, digger)
 				end
 			end
 		end
@@ -1221,9 +1212,7 @@ minetest.register_on_dignode(function(pos, node, digger)
 		if string.split(stack:get_name(), "_")[1]=="axiscore:axe" then
 			for _,attr in ipairs(stack:get_definition().attributes) do
 				if attr.type=="axe" or attr.type=="all" then
-					for i=1,attr.level do
-						attr.func(pos, node, digger)
-					end
+					attr.func(pos, node, digger)
 				end
 			end
 		end
@@ -1307,9 +1296,7 @@ minetest.register_on_dignode(function(pos, node, digger)
 		if string.split(stack:get_name(), "_")[1]=="axiscore:shovel" then
 			for _,attr in ipairs(stack:get_definition().attributes) do
 				if attr.type=="shovel" or attr.type=="all" then
-					for i=1,attr.level do
-						attr.func(pos, node, digger)
-					end
+					attr.func(pos, node, digger)
 				end
 			end
 		end
