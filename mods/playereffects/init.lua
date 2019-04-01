@@ -109,7 +109,6 @@ function playereffects.apply_effect_type(effect_type_id, duration, player, repea
 		end
 	end
 	if(is_player == false) then
-		minetest.log("error", "[playereffects] Attempted to apply effect type "..effect_type_id.." to a non-player!")
 		return false
 	end
 

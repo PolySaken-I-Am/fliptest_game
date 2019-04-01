@@ -51,6 +51,7 @@ minetest.register_craftitem("axiscore:toolBinding_string", {
 	attributes = {},
 	name2="string",
 	displayname="String",
+	xtra_dmg=0,
 })
 
 table.insert(axiscore.bindings, "axiscore:toolBinding_string")
@@ -68,7 +69,7 @@ minetest.register_craftitem("axiscore:pickHead_stone", {
 table.insert(axiscore.pickheads, "axiscore:pickHead_stone")
 
 
-function axiscore.register_tool_material(material, name, displayname, displayname2, cooldown, sworddamage, snappy, choppy, cracky, crumbly, matgroups, colorize, attributes, disallow, armor)
+function axiscore.register_tool_material(material, name, displayname, displayname2, cooldown, sworddamage, snappy, choppy, cracky, crumbly, matgroups, colorize, attributes, disallow, bow_str, bow_time)
 	if not disallow.handle then
 		minetest.register_craftitem("axiscore:toolHandle_"..name, {
 			description = displayname.." Tool Handle\n"..displayname2,
@@ -83,6 +84,8 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			choppy=choppy,
 			cracky=cracky,
 			crumbly=crumbly,
+			bowdmg=bow_str or sworddamage,
+			drawspeed=bow_time or cooldown,
 		})
 		minetest.register_craft({
 			output = "axiscore:toolHandle_"..name,
@@ -109,6 +112,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			choppy=choppy,
 			cracky=cracky,
 			crumbly=crumbly,
+			xtra_dmg=sworddamage/2,
 		})
 		minetest.register_craft({
 			output = "axiscore:toolBinding_"..name,
@@ -148,7 +152,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			recipe = {
 				{'', 'axiscore:craft_hammer', ''},
 				{'', material, ''},
-				{'', '', ''},
+				{'', material, ''},
 			},
 			replacements = {{"axiscore:craft_hammer","axiscore:craft_hammer"}}
 		})
@@ -281,11 +285,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{},
-	{	
-		groups = {armor_heal=0, armor_use=1600, physics_speed=-0.03, physics_gravity=0.03},
-		armor_groups = {fleshy=15},
-		damage_groups = {cracky=2, snappy=3, choppy=2, crumbly=1, level=2},
-	}
+	19,
+	5
 )
 
 axiscore.register_tool_material(
@@ -316,11 +317,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	9,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -351,11 +349,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	9,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -386,11 +381,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	9,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -421,11 +413,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	9,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -456,11 +445,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	9,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -491,11 +477,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	13,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -526,11 +509,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	13,
+	nil
 )
 
 
@@ -563,11 +543,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	11,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -598,11 +575,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	15,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -627,18 +601,15 @@ axiscore.register_tool_material(
 	{
 		{
 			name=minetest.colorize("#ceff89", "\nBenevolent"),
-			type="nil",
+			type="all",
 			func=function(pos, node, digger)
 				digger:set_hp(digger:get_hp()+1)
 			end,
 		}
 	}, 
 	{binding=1, plate=1},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	-5,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -670,11 +641,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{},
-	{	
-		groups = {armor_heal=6, armor_use=800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=15},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	31,
+	7
 )
 
 axiscore.register_tool_material(
@@ -704,11 +672,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	7,
+	2
 )
 
 axiscore.register_tool_material(
@@ -738,11 +703,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{},
-	{	
-		groups = { armor_heal=6, armor_use=1600, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=13},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	9,
+	3
 )
 
 axiscore.register_tool_material(
@@ -776,7 +738,8 @@ axiscore.register_tool_material(
 	{binding=1,
 	 handle=1,
 	 plate=1},
-	 nil
+	nil,
+	nil
 )
 
 axiscore.register_tool_material(
@@ -800,17 +763,17 @@ axiscore.register_tool_material(
 	{
 		{
 			name=minetest.colorize("#e5ce00", "\nExpensive"),
-			type="nil",
+			type="pick",
 			func=function(pos, node, digger)
+				if node.name=="default:stone_with_gold" then
+					digger:get_inventory():add_item("main", "default:gold_lump")
+				end
 			end,
 		}
 	}, 
 	{},
-	{	
-		groups = {armor_heal=6, armor_use=1800, physics_speed=-0.03, physics_gravity=0.03, not_in_creative_inventory=1},
-		armor_groups = {fleshy=12},
-		damage_groups = {cracky=3, snappy=2, choppy=2, crumbly=1, level=2},
-	}
+	2,
+	1
 )
 
 axiscore.register_tool_material(
@@ -840,11 +803,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{},
-	{	
-		groups = {armor_heal=0, armor_use=900, physics_speed=-0.03, physics_gravity=0.03},
-		armor_groups = {fleshy=15},
-		damage_groups = {cracky=2, snappy=3, choppy=2, crumbly=1, level=2},
-	}
+	14,
+	3
 )
 
 axiscore.register_tool_material(
@@ -874,11 +834,8 @@ axiscore.register_tool_material(
 		}
 	}, 
 	{},
-	{
-		groups = {armor_heal=12, armor_use=100, not_in_creative_inventory=1}, 
-		armor_groups = {fleshy=20},
-		damage_groups = {cracky=2, snappy=1, level=3},
-	}
+	31,
+	7
 )
 
 axiscore.register_tool_material(
@@ -908,6 +865,7 @@ axiscore.register_tool_material(
 	{binding=1,
 	 handle=1,
 	 plate=1},
+	 nil,
 	 nil
 )
 
@@ -938,6 +896,7 @@ axiscore.register_tool_material(
 	{binding=1,
 	 shovel=1,
 	 plate=1},
+	 nil,
 	 nil
 )
 
@@ -960,14 +919,22 @@ axiscore.register_tool_material(
 	{
 		{
 			name=minetest.colorize("#ff9900", "\nVolcanic"),
-			type="nil",
+			type="pick",
 			func=function(pos, node, digger)
+				minetest.after(0.1, function()
+					if node.name=="default:stone_with_diamond" then
+						digger:get_inventory():remove_item("main", "default:diamond")
+						digger:get_inventory():add_item("main", "mobs:lava_orb")
+					end
+					return true
+				end)
 			end,
 		}
 	}, 
 	{binding=1,
 	 handle=1,
 	 plate=1},
+	 nil,
 	 nil
 )
 
@@ -1023,11 +990,8 @@ axiscore.register_tool_material(
 	}, 
 	{binding=1,
 	 handle=1},
-	{
-		groups = {armor_heal=20, armor_use=50, not_in_creative_inventory=1}, 
-		armor_groups = {fleshy=30},
-		damage_groups = {cracky=2, snappy=1, level=3},
-	}
+	nil,
+	nil
 )
 
 local function tableHasKey(table,key)
@@ -1503,6 +1467,8 @@ end
 
 local function set_draw(player, n)
 	player:set_attribute("axiscore_draw", n)
+	player:set_attribute("axiscore_bowspeed", speed)
+	player:set_attribute("axiscore_bowdmg", damage)
 end
 
 local function get_draw(player)
@@ -1513,21 +1479,20 @@ local function startDraw(item, player)
 	set_draw(player, 1)
 end
 
+axiscore.bow_tmp={}
+
 local function fire(player)
 	local pos = player:getpos()
 	local dir = player:get_look_dir()
 	local yaw = player:get_look_yaw()
 	if pos and dir and yaw then
 		pos.y = pos.y + 1.6
+		axiscore.bow_tmp=player:get_wielded_item():get_definition().dmg
 		local obj = minetest.add_entity(pos, "axiscore:arrow")
 		if obj then
 			obj:setvelocity({x=dir.x * 45, y=dir.y * 45, z=dir.z * 45})
 			obj:setacceleration({x=dir.x * 0, y=0, z=dir.z * 0})
 			obj:setyaw(yaw + math.pi)
-			local ent = obj:get_luaentity()
-			if ent then
-				ent.player = ent.player or player
-			end
 		end
 	end
 end
@@ -1546,6 +1511,13 @@ local proj = {
 	lastpos= {},
 	collisionbox = {0.1, 0.1, 0.1, 0.1, 0.1, 0.1},
 }
+proj.on_activate = function(self, staticdata)
+	if axiscore.bow_tmp then
+		self.se=axiscore.bow_tmp
+	else
+		self.object:remove()
+	end
+end
 proj.on_step = function(self, dtime)
 	self.timer = self.timer + dtime
 	local pos = self.object:getpos()
@@ -1556,7 +1528,7 @@ proj.on_step = function(self, dtime)
 		for k, obj in pairs(objs) do
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "axiscore:arrow" and obj:get_luaentity().name ~= "__builtin:item" then
-					local damage = 10
+					local damage = self.se
 					obj:punch(self.object, 1.0, {
 						full_punch_interval = 1.0,
 						damage_groups= {fleshy = damage},
@@ -1564,7 +1536,7 @@ proj.on_step = function(self, dtime)
 					self.object:remove()
 				end
 			else
-				local damage = 10
+				local damage = self.se
 				obj:punch(self.object, 1.0, {
 					full_punch_interval = 1.0,
 					damage_groups= {fleshy = damage},
@@ -1606,17 +1578,17 @@ minetest.register_globalstep(function(dtime)
 			if string.split(player:get_wielded_item():get_name(), "_")[1]=="axiscore:bow" then
 				if get_draw(player) > 0 then
 					if player:get_player_control().LMB then
-						if get_draw(player) < 50 then
+						if player:get_wielded_item():get_definition().speed and get_draw(player) < player:get_wielded_item():get_definition().speed*10 then
 							set_draw(player, get_draw(player)+1)
 						else
 							fire(player)
-							set_draw(player, 0)
+							set_draw(player, 0, nil, nil)
 						end
 					end
 				end
 			end
 		else
-			set_draw(player, 0)
+			set_draw(player, 0, nil, nil)
 		end
 	end
 end)
@@ -1660,16 +1632,20 @@ for _,head in ipairs(axiscore.plates) do
 				attrpt=attrpt..a.." "..n.level
 			end
 			minetest.register_tool("axiscore:bow_".._..__..___, {
-				description = handle_def.displayname.." Bow"..attrpt,
+				description = handle_def.displayname.." Bow"..attrpt.."\nBow Pull Time: "..handle_def.drawspeed.."\nBow Damage: "..handle_def.bowdmg+binding_def.xtra_dmg,
 				inventory_image = "("..handle_def.inventory_image2..")^("..head_def.inventory_image4..")^("..binding_def.inventory_image2..")",
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},
 				attributes=attrlist,
+				speed=handle_def.drawspeed,
+				dmg=handle_def.bowdmg+binding_def.xtra_dmg,
 				on_use=function(itemstack, player, pointed)
 					if player:get_inventory():contains_item("main", "axiscore:arrow") then
 						startDraw(itemstack, player)
 						player:get_inventory():remove_item("main", "axiscore:arrow")
+						itemstack:add_wear(500)
 					end
+					return itemstack
 				end
 			})
 			minetest.register_craft({
