@@ -35,33 +35,3 @@ minetest.register_craft({
         }
 })
 
-
--- Note: This rope also counts as a rail node; thus, carts can move through it
-minetest.register_node("cottages:ladder_with_rope_and_rail", {
-	description = "Ladder with rail support",
-	drawtype = "signlike",
-	tiles = {"default_ladder_wood.png^carts_rail_straight.png^cottages_rope.png"},
-	inventory_image = "default_ladder_wood.png",
-	wield_image = "default_ladder_wood.png",
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	sunlight_propagates = true,
-	walkable = false,
-	climbable = true,
-	is_ground_content = false,
-	selection_box = {
-		type = "wallmounted",
-	},
-	groups = {choppy=2,oddly_breakable_by_hand=3,rail=1,connect_to_raillike=1}, --connect_to_raillike=minetest.raillike_group("rail")},
-	legacy_wallmounted = true,
-	sounds = default.node_sound_wood_defaults(),
-})
-
-
-
-minetest.register_craft({
-	output = "cottages:ladder_with_rope_and_rail 3",
-	recipe = {
-		{"default:ladder","cottages:rope", "default:rail"}
-        }
-})

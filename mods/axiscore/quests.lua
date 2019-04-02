@@ -148,7 +148,7 @@ quests.register_quest("fliptest:q7",{
 	autoaccept=true,
 	callback=function(playername, quest)
 		quests.start_quest(playername, "fliptest:q8")
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Make a proper wooden tool handle."))
+		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Make a proper apple wood tool handle."))
 	end,
 })
 
@@ -160,7 +160,7 @@ end)
 
 quests.register_quest("fliptest:q8",{
 	title=minetest.colorize("#00ffff","Tool of the Master"),
-	description="Carve a wooden log into a tool handle.",
+	description="Carve some apple wood into a tool handle.",
 	max=1,
 	autoaccept=true,
 	callback=function(playername, quest)

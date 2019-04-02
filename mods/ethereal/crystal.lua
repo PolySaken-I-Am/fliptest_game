@@ -53,7 +53,7 @@ minetest.register_node("ethereal:crystal_block", {
 	description = S("Crystal Block"),
 	tiles = {"crystal_block_frame.png", "crystal_block_middle.png"},
 	light_source = 9,
-	drawtype = "glasslike_framed_optional",
+	drawtype = "glasslike_framed",
 	is_ground_content = false,
 	groups = {cracky = 1, level = 2, puts_out_fire = 1, cools_lava = 1},
 	sounds = default.node_sound_glass_defaults(),

@@ -316,7 +316,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	9,
 	nil
 )
@@ -348,7 +348,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	9,
 	nil
 )
@@ -380,7 +380,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	9,
 	nil
 )
@@ -412,7 +412,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	9,
 	nil
 )
@@ -444,7 +444,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	9,
 	nil
 )
@@ -476,7 +476,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	13,
 	nil
 )
@@ -508,7 +508,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	13,
 	nil
 )
@@ -542,7 +542,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	11,
 	nil
 )
@@ -574,7 +574,7 @@ axiscore.register_tool_material(
 			end,
 		}
 	}, 
-	{binding=1, plate=1},
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
 	15,
 	nil
 )
@@ -591,7 +591,6 @@ axiscore.register_tool_material(
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
 	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
 	{	
-		woodhandle=1,
 		healing=1,
 		tool=1,
 		qn_cost=1,
@@ -729,8 +728,10 @@ axiscore.register_tool_material(
 			type="all",
 			func=function(pos, node, digger)
 				minetest.after(0.1, function()
-					digger:get_inventory():remove_item("main", minetest.registered_nodes[node.name].drop)
-					digger:get_inventory():add_item("main", node.name)
+					if minetest.registered_nodes[node.name].drop then
+						digger:get_inventory():remove_item("main", minetest.registered_nodes[node.name].drop)
+						digger:get_inventory():add_item("main", node.name)
+					end
 				end)
 			end,
 		}
@@ -901,16 +902,16 @@ axiscore.register_tool_material(
 )
 
 axiscore.register_tool_material(
-	"default:obsidian_shard", 
+	"default:obsidian", 
 	"obsidian", 
 	"Obsidian", 
 	"Obsidian", 
 	0.8, 
 	11, 
-	{times={[1]=3.0, [2]=2.00, [3]=0.70}, uses=9, maxlevel=3}, -- snappy
-	{times={[1]=3.20, [2]=2.00, [3]=0.90}, uses=5, maxlevel=3}, -- choppy
-	{times={[1]=3.4, [2]=2.4, [3]=0.90}, uses=5, maxlevel=3}, -- cracky 
-	{times={[1]=2.40, [2]=0.90, [3]=0.60}, uses=5, maxlevel=3}, -- crumbly
+	{times={[1]=3.0, [2]=2.00, [3]=0.70}, uses=0, maxlevel=3}, -- snappy
+	{times={[1]=3.20, [2]=2.00, [3]=0.90}, uses=0, maxlevel=3}, -- choppy
+	{times={[1]=3.4, [2]=2.4, [3]=0.90}, uses=0, maxlevel=3}, -- cracky 
+	{times={[1]=2.40, [2]=0.90, [3]=0.60}, uses=0, maxlevel=3}, -- crumbly
 	{	
 		obsidian=1,
 		tool=1,
@@ -967,7 +968,7 @@ axiscore.register_tool_material(
 							width = 1,
 							items = {minetest.registered_nodes[node.name].drop}
 						})
-						if cooked and cooked.item ~= nil and cooked.item ~= "" then
+						if cooked and cooked.item ~= nil and cooked.item ~= {} then
 							digger:get_inventory():remove_item("main", minetest.registered_nodes[node.name].drop)
 							digger:get_inventory():add_item("main", minetest.get_craft_result({method = "cooking", width = 1, items = {minetest.registered_nodes[node.name].drop}}).item)
 							
@@ -978,7 +979,7 @@ axiscore.register_tool_material(
 							width = 1,
 							items = {node.name}
 						})
-						if cooked and cooked.item ~= nil and cooked.item ~= "" then
+						if cooked and cooked.item ~= nil and cooked.item ~= {} then
 							digger:get_inventory():remove_item("main", node.name)
 							digger:get_inventory():add_item("main", minetest.get_craft_result({method = "cooking", width = 1, items = {node.name}}).item)
 							
@@ -1314,7 +1315,7 @@ for _,head in ipairs(axiscore.swordblades) do
 					groupcaps={
 						snappy = {times={[1]=head_def.snappy.times[1], [2]=head_def.snappy.times[2], [3]=head_def.snappy.times[3]}, uses=head_def.snappy.uses+handle_def.snappy.uses+binding_def.snappy.uses, maxlevel=head_def.snappy.maxlevel},
 					},
-					damage_groups = {fleshy=head_def.sworddamage},
+					damage_groups = {fleshy=head_def.sworddamage, uses=head_def.snappy.uses},
 				},
 				groups = {not_in_creative_inventory=1},
 				sound = {breaks = "default_tool_breaks"},

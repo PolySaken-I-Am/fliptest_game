@@ -192,7 +192,7 @@ minetest.register_craft({
 	output = 'axiscore:arrow 17',
 	recipe = {
 		{'', 'default:obsidian_shard', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:woodhandle', ''},
 		{'', 'mobs:chicken_feather', ''},
 	},
 })
