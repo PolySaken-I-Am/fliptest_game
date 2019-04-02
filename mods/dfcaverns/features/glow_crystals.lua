@@ -31,7 +31,7 @@ end
 
 
 minetest.register_node("dfcaverns:glow_ruby_ore", {
-	description = S("Crystal Vein"),
+	description = S("Interruby Ore"),
 	_doc_items_longdesc = dfcaverns.doc.glow_ruby_ore_desc,
 	_doc_items_usagehelp = dfcaverns.doc.glow_ruby_ore_usage,
 	tiles = {"dfcaverns_glow_ruby_ore.png"},

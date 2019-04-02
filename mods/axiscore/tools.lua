@@ -386,8 +386,8 @@ axiscore.register_tool_material(
 )
 
 axiscore.register_tool_material(
-	"default:jungle_wood", 
-	"jungle_wood", 
+	"default:junglewood", 
+	"junglewood", 
 	"Jungle", 
 	"Jungle Wood", 
 	1, 
@@ -439,6 +439,134 @@ axiscore.register_tool_material(
 	{
 		{
 			name=minetest.colorize("#fffdef", "\nLight"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	9,
+	nil
+)
+
+axiscore.register_tool_material(
+	"ethereal:banana_wood", 
+	"banana_wood", 
+	"Banana", 
+	"Banana Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		banana=1,
+		tool=1,
+		qn_cost=2,
+		qn_efficiency=1,
+	},
+	"#d1cfadd0", 
+	{
+		{
+			name=minetest.colorize("#fffaa0", "\nGriggly"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	9,
+	nil
+)
+
+axiscore.register_tool_material(
+	"ethereal:birch_wood", 
+	"birch_wood", 
+	"Birch", 
+	"Birch Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		birch=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=2,
+	},
+	"#fffde0d0", 
+	{
+		{
+			name=minetest.colorize("#fffde0", "\nPapery"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	9,
+	nil
+)
+
+axiscore.register_tool_material(
+	"ethereal:mushroom_trunk", 
+	"mushroom_trunk", 
+	"Fungal", 
+	"Woody Mushroom", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		mushroom=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=2,
+	},
+	"#e2e2ccd0", 
+	{
+		{
+			name=minetest.colorize("#c1c1b4", "\nGrubby"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	9,
+	nil
+)
+
+axiscore.register_tool_material(
+	"ethereal:palm_wood", 
+	"palm_wood", 
+	"Palm", 
+	"Coconut Palm Wood", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		palm=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=2,
+	},
+	"#eacfa6d0", 
+	{
+		{
+			name=minetest.colorize("#eacfa6", "\nOily"),
 			type="nil",
 			func=function(pos, node, digger)
 			end,
@@ -513,7 +641,197 @@ axiscore.register_tool_material(
 	nil
 )
 
+axiscore.register_tool_material(
+	"dfcaverns:goblin_cap_wood", 
+	"goblin_cap_wood", 
+	"Goblin Cap", 
+	"Goblin Cap", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		goblincap=1,
+		tool=1,
+		qn_cost=1,
+		qn_efficiency=2,
+	},
+	"#ffa500d0", 
+	{
+		{
+			name=minetest.colorize("#c1c1b4", "\nGrubby"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	13,
+	nil
+)
 
+axiscore.register_tool_material(
+	"dfcaverns:nether_cap_wood", 
+	"nether_cap_wood", 
+	"Nether Cap", 
+	"Nether Cap", 
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		goblincap=1,
+		tool=1,
+		qn_cost=2,
+		qn_efficiency=5,
+	},
+	"#174393d0", 
+	{
+		{
+			name=minetest.colorize("#174393", "\nDepth Treader"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	13,
+	nil
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:fungiwood_wood", 
+	"fungiwood_wood", 
+	"Mycelial", 
+	"Fungi Wood",
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		goblincap=1,
+		tool=1,
+		qn_cost=3,
+		qn_efficiency=5,
+	},
+	"#eae8c5d0", 
+	{
+		{
+			name=minetest.colorize("#3c540c", "\nDank"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	13,
+	nil
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:tunnel_tube_wood", 
+	"tunnel_tube_wood", 
+	"Compound Fungus", 
+	"Tunnel Tube Pile",
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		goblincap=1,
+		tool=1,
+		qn_cost=3,
+		qn_efficiency=5,
+	},
+	"#ce2bd1d0", 
+	{
+		{
+			name=minetest.colorize("#ce2bd1", "\nLayered"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	13,
+	nil
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:spore_tree_wood", 
+	"spore_tree_wood", 
+	"Interwood", 
+	"Spore Tree Planks",
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		goblincap=1,
+		tool=1,
+		qn_cost=3,
+		qn_efficiency=5,
+	},
+	"#fffdefd0", 
+	{
+		{
+			name=minetest.colorize("#fffdef", "\nConnected"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	13,
+	nil
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:tower_cap_wood", 
+	"tower_cap_wood", 
+	"Towerwood", 
+	"Tower Cap Planks",
+	1, 
+	2, 
+	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
+	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
+	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
+	{times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=10, maxlevel=1}, -- crumbly
+	{	
+		woodhandle=1,
+		goblincap=1,
+		tool=1,
+		qn_cost=3,
+		qn_efficiency=5,
+	},
+	"#fffdefd0", 
+	{
+		{
+			name=minetest.colorize("#fffdef", "\nInfested"),
+			type="nil",
+			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1, plate=1, sword=1, shovel=1, axe=1, pick=1},
+	13,
+	nil
+)
 
 axiscore.register_tool_material(
 	"ethereal:frost_wood", 
@@ -585,7 +903,7 @@ axiscore.register_tool_material(
 	"Healing", 
 	"Healing Wood", 
 	1, 
-	2, 
+	-2, 
 	{times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=1}, -- snappy
 	{times={[2]=3.00, [3]=1.60}, uses=10, maxlevel=1}, -- choppy
 	{times={[3]=1.60}, uses=10, maxlevel=1}, -- cracky
@@ -860,6 +1178,38 @@ axiscore.register_tool_material(
 			name=minetest.colorize("#ffff00", "\nAlien"),
 			type="nil",
 			func=function(pos, node, digger)
+			end,
+		}
+	}, 
+	{binding=1,
+	 handle=1,
+	 plate=1},
+	 nil,
+	 nil
+)
+
+axiscore.register_tool_material(
+	"dfcaverns:glow_ruby_ore", 
+	"glow_ruby_ore", 
+	"Interruby", 
+	"Interruby Ore", 
+	0.6, 
+	9, 
+	{times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=10, maxlevel=3}, -- snappy
+	{times={[1]=2.20, [2]=1.00, [3]=0.60}, uses=6, maxlevel=3}, -- choppy
+	{times={[1]=2.4, [2]=1.2, [3]=0.60}, uses=6, maxlevel=3}, -- cracky 
+	{times={[1]=1.20, [2]=0.60, [3]=0.30}, uses=6, maxlevel=3}, -- crumbly
+	{	
+		mese=1,
+		tool=1,
+	},
+	"#ff328bd0", 
+	{
+	{
+			name=minetest.colorize("#ceff89", "\nBenevolent"),
+			type="all",
+			func=function(pos, node, digger)
+				digger:set_hp(digger:get_hp()+1)
 			end,
 		}
 	}, 
@@ -1582,6 +1932,7 @@ minetest.register_globalstep(function(dtime)
 						if player:get_wielded_item():get_definition().speed and get_draw(player) < player:get_wielded_item():get_definition().speed*10 then
 							set_draw(player, get_draw(player)+1)
 						else
+							player:get_inventory():remove_item("main", "axiscore:arrow")
 							fire(player)
 							set_draw(player, 0, nil, nil)
 						end
@@ -1643,7 +1994,6 @@ for _,head in ipairs(axiscore.plates) do
 				on_use=function(itemstack, player, pointed)
 					if player:get_inventory():contains_item("main", "axiscore:arrow") then
 						startDraw(itemstack, player)
-						player:get_inventory():remove_item("main", "axiscore:arrow")
 						itemstack:add_wear(500)
 					end
 					return itemstack
