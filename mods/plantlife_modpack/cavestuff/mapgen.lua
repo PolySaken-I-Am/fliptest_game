@@ -37,9 +37,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 						minetest.registered_nodes[nn].buildable_to then
 						nn = minetest.get_node({x=x,y=ground_y,z=z}).name
 						-- If desert sand, add dry shrub
-						if nn == "default:dirt_with_grass" then
+						if nn == "default:dirt_with_grass" or nn == "default:sand" or nn == "default:dirt" then
 							minetest.set_node(p,{name="cavestuff:pebble_"..pr:next(1,2), param2=math.random(0,3)})
-						elseif nn == "default:desert_sand" then
+						elseif nn == "default:desert_sand" or nn == "default:desert_stone" then
 							minetest.set_node(p,{name="cavestuff:desert_pebble_"..pr:next(1,2), param2=math.random(0,3)})
 					    end
 					end
