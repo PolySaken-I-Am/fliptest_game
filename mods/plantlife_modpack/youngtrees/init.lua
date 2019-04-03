@@ -136,6 +136,12 @@ end
 biome_lib:register_generate_plant({
     surface = {
 		"default:dirt_with_grass",
+		"default:dirt",
+		"ethereal:bamboo_dirt",
+		"ethereal:gray_dirt",
+		"ethereal:grove_dirt",
+		"ethereal:jungle_dirt",
+		"ethereal:prairie_dirt",
 		"stoneage:grass_with_silex",
 		"sumpf:peat",
 		"sumpf:sumpf"

@@ -18,7 +18,7 @@ quests.register_quest("fliptest:q1",{
 	autoaccept=true,
 	callback=function(playername, quest)
 		quests.start_quest(playername, "fliptest:q2")
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Break some tiny trees for sticks."))
+		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Break some tiny trees or floating twigs for sticks."))
 	end,
 })
 
@@ -30,18 +30,10 @@ minetest.register_on_dignode(function(pos, node, digger)
 	end
 end)
 
-minetest.register_on_placenode(function(pos, node, digger)
-	if digger then
-		if minetest.get_item_group(node.name, "quest_pebble") then
-			quests.update_quest(digger:get_player_name(), "fliptest:q1", -1)
-		end
-	end
-end)
-
 quests.register_quest("fliptest:q2",{
 	title=minetest.colorize("#00ffff","The Situation part 2"),
 	description="Fix your situation by finding some sticks to make tools.",
-	max=3,
+	max=1,
 	autoaccept=true,
 	callback=function(playername, quest)
 		quests.start_quest(playername, "fliptest:q3")
@@ -49,17 +41,11 @@ quests.register_quest("fliptest:q2",{
 	end,
 })
 
-minetest.register_on_dignode(function(pos, node, digger)
-	if digger then
-		if node.name=="bushes:youngtree2_bottom" then
-			quests.update_quest(digger:get_player_name(), "fliptest:q2", 1)
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_inventory():contains_item("main", "default:stick 3") then
+			quests.update_quest(player:get_player_name(), "fliptest:q2", 1)
 		end
-	end
-end)
-
-minetest.register_on_placenode(function(pos, node, digger)
-	if node.name=="bushes:youngtree2_bottom" then
-		quests.update_quest(digger:get_player_name(), "fliptest:q2", -1)
 	end
 end)
 
@@ -96,12 +82,6 @@ minetest.register_on_dignode(function(pos, node, digger)
 		if minetest.get_item_group(node.name, "tree") then
 			quests.update_quest(digger:get_player_name(), "fliptest:q4", 1)
 		end
-	end
-end)
-
-minetest.register_on_placenode(function(pos, node, digger)
-	if minetest.get_item_group(node.name, "tree") then
-		quests.update_quest(digger:get_player_name(), "fliptest:q4", -1)
 	end
 end)
 
