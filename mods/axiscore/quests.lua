@@ -91,7 +91,7 @@ quests.register_quest("fliptest:q5",{
 	max=1,
 	autoaccept=true,
 	callback=function(playername, quest)
-		quests.start_quest(player:get_player_name(), "fliptest:q6")
+		quests.start_quest(playername, "fliptest:q6")
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Make a Craftsman's knife. "))
 	end,
 })
