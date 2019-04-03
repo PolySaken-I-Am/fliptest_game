@@ -52,6 +52,7 @@ minetest.register_craftitem("axiscore:toolBinding_string", {
 	name2="string",
 	displayname="String",
 	xtra_dmg=0,
+	inventory_image3 = "axiscore_bowstring2.png^[colorize:#165b0bdf",
 })
 
 table.insert(axiscore.bindings, "axiscore:toolBinding_string")
@@ -103,7 +104,7 @@ function axiscore.register_tool_material(material, name, displayname, displaynam
 			description = displayname.." Tool Binding\n"..displayname2,
 			inventory_image = "axiscore_toolbinding.png^[colorize:"..colorize,
 			inventory_image2 = "axiscore_bowstring.png^[colorize:"..colorize,
-			inventory_image3 = "axiscore_bowstring_2.png^[colorize:"..colorize,
+			inventory_image3 = "axiscore_bowstring2.png^[colorize:"..colorize,
 			groups = matgroups,
 			attributes = attributes,
 			name2=name,
@@ -1816,10 +1817,18 @@ for _,head in ipairs(axiscore.axeheads) do
 	end
 end
 
+minetest.after(0.5, function()
+	hb.register_hudbar("axiscore:bowpull", "#ffffff", "Bow Charge", {bar="axiscore_bow_bar.png", icon="axiscore_bow_icon.png", bgicon="axiscore_trail.png"}, 0,10,true,nil)
+end)
+
+minetest.register_on_joinplayer(function(player)
+	minetest.after(0.5, function()
+		hb.init_hudbar(player, "axiscore:bowpull", 0, 10, true)
+	end)
+end)
+
 local function set_draw(player, n)
 	player:set_attribute("axiscore_draw", n)
-	player:set_attribute("axiscore_bowspeed", speed)
-	player:set_attribute("axiscore_bowdmg", damage)
 end
 
 local function get_draw(player)
@@ -1828,6 +1837,8 @@ end
 
 local function startDraw(item, player)
 	set_draw(player, 1)
+	hb.change_hudbar(player, "axiscore:bowpull", 1, player:get_wielded_item():get_definition().speed*10)
+	hb.unhide_hudbar(player, "axiscore:bowpull")
 end
 
 axiscore.bow_tmp={}
@@ -1919,7 +1930,7 @@ minetest.register_entity("axiscore:arrow", proj )
 
 
 
-minetest.register_on_newplayer(function(player)
+minetest.register_on_joinplayer(function(player)
 	set_draw(player, 0)
 end)
 
@@ -1931,16 +1942,25 @@ minetest.register_globalstep(function(dtime)
 					if player:get_player_control().LMB then
 						if player:get_wielded_item():get_definition().speed and get_draw(player) < player:get_wielded_item():get_definition().speed*10 then
 							set_draw(player, get_draw(player)+1)
+							hb.change_hudbar(player, "axiscore:bowpull", get_draw(player), player:get_wielded_item():get_definition().speed*10)
 						else
 							player:get_inventory():remove_item("main", "axiscore:arrow")
 							fire(player)
-							set_draw(player, 0, nil, nil)
+							set_draw(player, 0)
+							hb.hide_hudbar(player, "axiscore:bowpull")
+							hb.change_hudbar(player, "axiscore:bowpull", 0, 0)
 						end
+					else
+						set_draw(player, 0)
+						hb.hide_hudbar(player, "axiscore:bowpull")
+						hb.change_hudbar(player, "axiscore:bowpull", 0, 0)
 					end
 				end
 			end
 		else
-			set_draw(player, 0, nil, nil)
+			set_draw(player, 0)
+			hb.hide_hudbar(player, "axiscore:bowpull")
+			hb.change_hudbar(player, "axiscore:bowpull", 0, 0)
 		end
 	end
 end)
@@ -2011,6 +2031,78 @@ for _,head in ipairs(axiscore.plates) do
 				output = "axiscore:bow_".._..__..___,
 				type="shapeless",
 				recipe = {"axiscore:bow_".._..__..___, head_def.material,},
+			})
+		end
+	end
+end
+
+
+for _,head in ipairs(axiscore.plates) do
+	for __,binding in ipairs(axiscore.bindings) do
+		for ___,handle in ipairs(axiscore.handles) do
+			local head_def = ItemStack(head):get_definition()
+			local binding_def = ItemStack(binding):get_definition()
+			local handle_def = ItemStack(handle):get_definition()
+			local attrlist = {}
+			for _,attr in ipairs(head_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(binding_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			for _,attr in ipairs(handle_def.attributes) do
+				if attr.name then
+					if not tableHasKey(attrlist, attr.name) then
+						attrlist[attr.name]={level=1, func=attr.func, name=attr.name}
+					else
+						attrlist[attr.name]={level=attrlist[attr.name].level+1, func=attr.func, name=attr.name}
+					end
+				end
+			end
+			local attrpt=""
+			for a,n in pairs(attrlist) do
+				attrpt=attrpt..a.." "..n.level
+			end
+			minetest.register_tool("axiscore:bow_c".._..__..___, {
+				description = handle_def.displayname.." Crossbow"..attrpt.."\nBow Pull Time: "..handle_def.drawspeed*2 .."\nBow Damage: "..(handle_def.bowdmg+binding_def.xtra_dmg)*2,
+				inventory_image = "("..handle_def.inventory_image3..")^("..head_def.inventory_image6..")^("..binding_def.inventory_image3..")",
+				groups = {not_in_creative_inventory=1},
+				sound = {breaks = "default_tool_breaks"},
+				attributes=attrlist,
+				speed=handle_def.drawspeed*2,
+				dmg=(handle_def.bowdmg+binding_def.xtra_dmg)*2,
+				on_use=function(itemstack, player, pointed)
+					if player:get_inventory():contains_item("main", "axiscore:arrow") then
+						startDraw(itemstack, player)
+						itemstack:add_wear(500)
+					end
+					return itemstack
+				end
+			})
+			minetest.register_craft({
+				output = "axiscore:bow_c".._..__..___,
+				recipe = {
+					{handle, head, handle},
+					{binding, handle, binding},
+					{binding, handle, binding},
+				},
+			})
+			minetest.register_craft({
+				output = "axiscore:bow_c".._..__..___,
+				type="shapeless",
+				recipe = {"axiscore:bow_c".._..__..___, head_def.material,},
 			})
 		end
 	end
