@@ -323,14 +323,7 @@ quests.register_quest("fliptest:q18",{
 	autoaccept=true,
 	callback=function(playername, quest)
 		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Congratulations! You are no longer in the tutorial."))
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","It is recommended to disable the quest GUI at this time."))
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Most quests from here on will come with rewards."))
-		quests.start_quest(playername, "fliptest:armory1")
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Find Mithril."))
-		quests.start_quest(playername, "fliptest:magic1")
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Find and smelt 10 Gold"))
-		quests.start_quest(playername, "fliptest:spirit1")
-		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","Craft A Backwards Book"))
+		minetest.chat_send_player(playername, minetest.colorize("#ff00ff","At this point, there is no planned future content."))
 	end,
 })
 
