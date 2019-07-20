@@ -1322,7 +1322,8 @@ axiscore.register_tool_material(
 						if cooked and cooked.item ~= nil and cooked.item ~= {} then
 							digger:get_inventory():remove_item("main", minetest.registered_nodes[node.name].drop)
 							digger:get_inventory():add_item("main", minetest.get_craft_result({method = "cooking", width = 1, items = {minetest.registered_nodes[node.name].drop}}).item)
-							
+						else
+							return true
 						end
 					else
 						local cooked = minetest.get_craft_result({
@@ -1333,7 +1334,8 @@ axiscore.register_tool_material(
 						if cooked and cooked.item ~= nil and cooked.item ~= {} then
 							digger:get_inventory():remove_item("main", node.name)
 							digger:get_inventory():add_item("main", minetest.get_craft_result({method = "cooking", width = 1, items = {node.name}}).item)
-							
+						else
+							return true	
 						end
 					end
 				end)

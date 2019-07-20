@@ -81,6 +81,38 @@ if armor.materials.wood then
 	})
 end
 
+minetest.register_craft({
+	output = "3d_armor:helmet_wood",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "", "group:wood"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_wood",
+	recipe = {
+		{"group:wood", "", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_wood",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "", "group:wood"},
+		{"group:wood", "", "group:wood"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_wood",
+	recipe = {
+		{"group:wood", "", "group:wood"},
+		{"group:wood", "", "group:wood"},
+	},
+})
+
 if armor.materials.cactus then
 	armor:register_armor("3d_armor:helmet_cactus", {
 		description = S("Cactus Helmet"),
@@ -111,6 +143,38 @@ if armor.materials.cactus then
 		damage_groups = {cracky=3, snappy=3, choppy=2, crumbly=2, level=1},
 	})
 end
+
+minetest.register_craft({
+	output = "3d_armor:helmet_cactus",
+	recipe = {
+		{"default:cactus", "default:cactus", "default:cactus"},
+		{"default:cactus", "3d_armor:helmet_wood", "default:cactus"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_cactus",
+	recipe = {
+		{"default:cactus", "3d_armor:chestplate_wood", "default:cactus"},
+		{"default:cactus", "default:cactus", "default:cactus"},
+		{"default:cactus", "default:cactus", "default:cactus"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_cactus",
+	recipe = {
+		{"default:cactus", "default:cactus", "default:cactus"},
+		{"default:cactus", "3d_armor:leggings_wood", "default:cactus"},
+		{"default:cactus", "", "default:cactus"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_cactus",
+	recipe = {
+		{"default:cactus", "3d_armor:boots_wood", "default:cactus"},
+		{"default:cactus", "", "default:cactus"},
+	},
+})
 
 if armor.materials.steel then
 	armor:register_armor("3d_armor:helmet_steel", {
@@ -147,6 +211,38 @@ if armor.materials.steel then
 	})
 end
 
+minetest.register_craft({
+	output = "3d_armor:helmet_steel",
+	recipe = {
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"default:steel_ingot", "3d_armor:helmet_bronze", "default:steel_ingot"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_steel",
+	recipe = {
+		{"default:steel_ingot", "3d_armor:chestplate_bronze", "default:steel_ingot"},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_steel",
+	recipe = {
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"default:steel_ingot", "3d_armor:leggings_bronze", "default:steel_ingot"},
+		{"default:steel_ingot", "", "default:steel_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_steel",
+	recipe = {
+		{"default:steel_ingot", "3d_armor:boots_bronze", "default:steel_ingot"},
+		{"default:steel_ingot", "", "default:steel_ingot"},
+	},
+})
+
 if armor.materials.bronze then
 	armor:register_armor("3d_armor:helmet_bronze", {
 		description = S("Bronze Helmet"),
@@ -182,6 +278,38 @@ if armor.materials.bronze then
 	})
 end
 
+minetest.register_craft({
+	output = "3d_armor:helmet_bronze",
+	recipe = {
+		{"default:bronze_ingot", "default:bronze_ingot", "default:bronze_ingot"},
+		{"default:bronze_ingot", "3d_armor:helmet_cactus", "default:bronze_ingot"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_bronze",
+	recipe = {
+		{"default:bronze_ingot", "3d_armor:chestplate_cactus", "default:bronze_ingot"},
+		{"default:bronze_ingot", "default:bronze_ingot", "default:bronze_ingot"},
+		{"default:bronze_ingot", "default:bronze_ingot", "default:bronze_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_bronze",
+	recipe = {
+		{"default:bronze_ingot", "default:bronze_ingot", "default:bronze_ingot"},
+		{"default:bronze_ingot", "3d_armor:leggings_cactus", "default:bronze_ingot"},
+		{"default:bronze_ingot", "", "default:bronze_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_bronze",
+	recipe = {
+		{"default:bronze_ingot", "3d_armor:boots_cactus", "default:bronze_ingot"},
+		{"default:bronze_ingot", "", "default:bronze_ingot"},
+	},
+})
+
 if armor.materials.diamond then
 	armor:register_armor("3d_armor:helmet_diamond", {
 		description = S("Diamond Helmet"),
@@ -212,6 +340,40 @@ if armor.materials.diamond then
 		damage_groups = {cracky=2, snappy=1, choppy=1, level=3},
 	})
 end
+
+
+minetest.register_craft({
+	output = "3d_armor:helmet_diamond",
+	recipe = {
+		{"default:diamond", "default:diamond", "default:diamond"},
+		{"default:diamond", "3d_armor:helmet_gold", "default:diamond"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_diamond",
+	recipe = {
+		{"default:diamond", "3d_armor:chestplate_gold", "default:diamond"},
+		{"default:diamond", "default:diamond", "default:diamond"},
+		{"default:diamond", "default:diamond", "default:diamond"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_diamond",
+	recipe = {
+		{"default:diamond", "default:diamond", "default:diamond"},
+		{"default:diamond", "3d_armor:leggings_gold", "default:diamond"},
+		{"default:diamond", "", "default:diamond"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_diamond",
+	recipe = {
+		{"default:diamond", "3d_armor:boots_gold", "default:diamond"},
+		{"default:diamond", "", "default:diamond"},
+	},
+})
+
 
 if armor.materials.gold then
 	armor:register_armor("3d_armor:helmet_gold", {
@@ -248,6 +410,38 @@ if armor.materials.gold then
 	})
 end
 
+minetest.register_craft({
+	output = "3d_armor:helmet_gold",
+	recipe = {
+		{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"},
+		{"default:gold_ingot", "3d_armor:helmet_steel", "default:gold_ingot"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_gold",
+	recipe = {
+		{"default:gold_ingot", "3d_armor:chestplate_steel", "default:gold_ingot"},
+		{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"},
+		{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_gold",
+	recipe = {
+		{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"},
+		{"default:gold_ingot", "3d_armor:leggings_steel", "default:gold_ingot"},
+		{"default:gold_ingot", "", "default:gold_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_gold",
+	recipe = {
+		{"default:gold_ingot", "3d_armor:boots_steel", "default:gold_ingot"},
+		{"default:gold_ingot", "", "default:gold_ingot"},
+	},
+})
+
 if armor.materials.mithril then
 	armor:register_armor("3d_armor:helmet_mithril", {
 		description = S("Mithril Helmet"),
@@ -278,6 +472,38 @@ if armor.materials.mithril then
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 end
+
+minetest.register_craft({
+	output = "3d_armor:helmet_mithril",
+	recipe = {
+		{"moreores:mithril_ingot", "moreores:mithril_ingot", "moreores:mithril_ingot"},
+		{"moreores:mithril_ingot", "3d_armor:helmet_crystal", "moreores:mithril_ingot"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_mithril",
+	recipe = {
+		{"moreores:mithril_ingot", "3d_armor:chestplate_crystal", "moreores:mithril_ingot"},
+		{"moreores:mithril_ingot", "moreores:mithril_ingot", "moreores:mithril_ingot"},
+		{"moreores:mithril_ingot", "moreores:mithril_ingot", "moreores:mithril_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_mithril",
+	recipe = {
+		{"moreores:mithril_ingot", "moreores:mithril_ingot", "moreores:mithril_ingot"},
+		{"moreores:mithril_ingot", "3d_armor:leggings_crystal", "moreores:mithril_ingot"},
+		{"moreores:mithril_ingot", "", "moreores:mithril_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_mithril",
+	recipe = {
+		{"moreores:mithril_ingot", "3d_armor:boots_crystal", "moreores:mithril_ingot"},
+		{"moreores:mithril_ingot", "", "moreores:mithril_ingot"},
+	},
+})
 
 if armor.materials.crystal then
 	armor:register_armor("3d_armor:helmet_crystal", {
@@ -311,36 +537,34 @@ if armor.materials.crystal then
 	})
 end
 
-for k, v in pairs(armor.materials) do
-	minetest.register_craft({
-		output = "3d_armor:helmet_"..k,
-		recipe = {
-			{v, v, v},
-			{v, "", v},
-			{"", "", ""},
-		},
-	})
-	minetest.register_craft({
-		output = "3d_armor:chestplate_"..k,
-		recipe = {
-			{v, "", v},
-			{v, v, v},
-			{v, v, v},
-		},
-	})
-	minetest.register_craft({
-		output = "3d_armor:leggings_"..k,
-		recipe = {
-			{v, v, v},
-			{v, "", v},
-			{v, "", v},
-		},
-	})
-	minetest.register_craft({
-		output = "3d_armor:boots_"..k,
-		recipe = {
-			{v, "", v},
-			{v, "", v},
-		},
-	})
-end
+minetest.register_craft({
+	output = "3d_armor:helmet_crystal",
+	recipe = {
+		{"ethereal:crystal_ingot", "ethereal:crystal_ingot", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "3d_armor:helmet_diamond", "ethereal:crystal_ingot"},
+		{"", "", ""},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:chestplate_crystal",
+	recipe = {
+		{"ethereal:crystal_ingot", "3d_armor:chestplate_diamond", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "ethereal:crystal_ingot", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "ethereal:crystal_ingot", "ethereal:crystal_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:leggings_crystal",
+	recipe = {
+		{"ethereal:crystal_ingot", "ethereal:crystal_ingot", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "3d_armor:leggings_diamond", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"},
+	},
+})
+minetest.register_craft({
+	output = "3d_armor:boots_crystal",
+	recipe = {
+		{"ethereal:crystal_ingot", "3d_armor:boots_diamond", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"},
+	},
+})

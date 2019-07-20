@@ -286,7 +286,7 @@ axiscore.spellcomponents["salve"]={
 	end
 }
 
-axiscore.spellrecipes["ethereal:golden_apple"]="touch"
+axiscore.spellrecipes["ethereal:golden_apple"]="salve"
 
 local function tableHasKey(table,key)
     return table[key] ~= nil
@@ -378,6 +378,7 @@ end
 minetest.register_craftitem("axiscore:spellbook", {
 	description = "Spellbook\nClick to rewrite\nRightclick to read",
 	inventory_image = "axiscore_book_reverse2.png",
+	stack_max=1,
 	on_use=function(itemstack,user)
 		local inv=user:get_inventory()
 		inv:set_size("spellsetup", 5)
